@@ -1,0 +1,7 @@
+foo = f(a, b, c)
+   a+b+c
+   a-b-c
+   if ( a >= 0 & b >= 0 & c >= 0 )
+      true
+   else
+      false

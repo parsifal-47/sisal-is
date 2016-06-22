@@ -1,0 +1,48 @@
+# FUNCTION Smooth: Piece of a large aerodynamics code obtained from NASA Ames.
+# Uses a 3 point weighted average for simplicity.
+# Refer to "Mapping Array Computations for a Dataflow Multiprocessor", by
+# J. Dennis.
+
+Smooth = f(n,Q,S,D)
+	let
+	    S1 = for e in S at j, k, l
+		      v = if ( j = 1 | k = 1 | l = 1 | j = n | k = n | l = n )
+			       e
+	              else
+			       e + 0.3 * ( Q[j+1,k,l] * D[j+1,k,l] 
+				       - 2.0 * Q[j,k,l] * D[j,k,l] 
+				       + Q[j-1,k,l] * D[j-1,k,l] ) / D[j,k,l]
+	          returns array of e
+
+	    S2 = for e in S1 at j, k, l
+		      v = if ( j = 1 | k = 1 | l = 1 | j = n | k = n | l = n )
+			        e
+	               else
+			        e + 0.3 * ( Q[j,k+1,l] * D[j,k+1,l] 
+				       - 2.0 * Q[j,k,l] * D[j,k,l] 
+				       + Q[j,k-1,l] * D[j,k-1,l] ) / D[j,k,l]
+	          returns array of e
+
+	    S3 = for e in S2 at j, k, l
+		      v = if ( j = 1 | k = 1 | l = 1 | j = n | k = n | l = n )
+			       e
+	              else
+			       e + 0.3 * ( Q[j,k,l+1] * D[j,k,l+1] 
+				       - 2.0 * Q[j,k,l] * D[j,k,l] 
+				       + Q[j,k,l-1] * D[j,k,l-1] ) / D[j,k,l]
+	          returns array of e
+	in
+	    S3
+
+main = f(n)
+	let
+	    Q = for i,j,k in [1..n]*[1..n]*[1..n]
+		 returns array of 1.1234
+
+	    S := for i,j,k in [1..n]*[1..n]*[1..n]
+		 returns array of 924.143567
+
+	    D := for i,j,k in [1..n]*[1..n]*[1..n]
+		 returns array of 0.1234
+	in
+	    Smooth( n, Q, S, D )

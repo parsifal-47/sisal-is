@@ -1,0 +1,13 @@
+foo = f(N, T)
+   for initial
+      i = 0
+      s = 0
+      t = T
+   repeat
+      s = old s + old i
+      i = if (t>0)
+                old i + t
+           else
+                old i + 1
+   while ( (s <= N) & (old i <= 100) )
+   returns value of s

@@ -1,0 +1,5 @@
+foo = f()
+   let
+      A = [1, 2, 3]
+   in
+      addh(A, 4)

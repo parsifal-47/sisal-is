@@ -1,0 +1,7 @@
+length = f()
+   let
+      s = 0
+   in
+      for i in [1..10]
+         s = old s + i
+      returns value of s

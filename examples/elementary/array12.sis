@@ -1,0 +1,5 @@
+main = f(N)
+   let
+      A = [ [N, N, N], [N, N, N], [N, N, N] ]
+   in
+      A[2]

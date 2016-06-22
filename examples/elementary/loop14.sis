@@ -1,0 +1,7 @@
+main = f(A)
+   let
+      s = 0
+   in
+      for i,j in [1..100]*[1..100]
+         s = old s + A[i, j]
+      returns value of s

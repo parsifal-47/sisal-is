@@ -1,0 +1,8 @@
+foo = f(N)
+   for initial
+      i = 0
+      s = 0
+   while (i<=N)
+      s = old s + i
+      i = old i + 1
+   returns value of s

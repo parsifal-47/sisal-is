@@ -1,0 +1,7 @@
+foo = f(a, b)
+   if ((a > b) & (a /= 0))
+      a - b
+   elseif (((b > a) & (b /= 0)) | ((a = b) & (a = 0)))
+      b - a
+   else
+      0

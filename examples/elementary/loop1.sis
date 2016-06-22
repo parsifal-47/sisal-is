@@ -1,0 +1,8 @@
+foo = f(N, T, S)
+   for initial
+      t = T
+      s = S
+      i = 0
+   while (i <= 2*N)
+      i = old i + (t * s) + 2*S
+   returns value of i

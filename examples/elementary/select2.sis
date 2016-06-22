@@ -1,0 +1,23 @@
+foo = f(a)
+  if (a=0)
+    0
+  elseif (a=1)
+    1
+  elseif (a=2)
+    2
+  elseif (a=3)
+    3
+  elseif (a=4)
+    4
+  elseif (a=5)
+    5
+  elseif (a=6)
+    6
+  elseif (a=7)
+    7
+  elseif (a=7)
+    8
+  elseif (a=9)
+    9
+  else
+    10

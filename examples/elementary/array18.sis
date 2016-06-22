@@ -1,0 +1,5 @@
+main = f(A)
+  let
+   B = remh(A)
+  in
+   B
