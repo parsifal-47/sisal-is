@@ -6,9 +6,6 @@
 # e ** ix  := cos(x) + i*sin(x)
 #
 
-type Complex = record[ R : double; I : double ]
-type OneDim = array [Complex]
-
 dft = f(N, X)
     let
        Pi = 3.1415926535897932;
