@@ -1,0 +1,27 @@
+{
+  "name": "sisal-is",
+  "version": "0.1.0",
+  "description": "Sisal-ident-based",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parsifal-47/sisal-is.git"
+  },
+  "keywords": [
+    "Sisal",
+    "compiler",
+    "functional"
+  ],
+  "author": "Renat Idrisov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parsifal-47/sisal-is/issues"
+  },
+  "homepage": "https://github.com/parsifal-47/sisal-is#readme"
+}
