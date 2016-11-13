@@ -10,9 +10,9 @@
 
 Conv = f(M, A, N, X)
     for I in [1..N-M+1
-     returns array of 
+    returns array of 
 		for J in [1..M]
-		 returns sum of A[J] * X[I+J-1]
+		returns sum of A[J] * X[I+J-1]
 
 Main = f(M, Cycles)
     let

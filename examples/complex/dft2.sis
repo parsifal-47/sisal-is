@@ -19,7 +19,7 @@ dft = f(N, X)
                          Ei = sin(EArg)
                          Rvalue = (X[J].R * Er) - (X[J].I * Ei)
                          Ivalue = (X[J].I * Er) + (X[J].R * Ei)
-                     returns (sum of Rvalue
+                         returns (sum of Rvalue
                              sum of Ivalue)
        returns array of (R = Rdata, I = Idata)
 
@@ -31,6 +31,6 @@ Main = f(N)
        X = for J in [1..N]
                   Rvalue = sin( (DRN * Pi) / 8.0 );
                   Ivalue = 0.0
-           returns array of (R = Rvalue, I = Ivalue)
+       returns array of (R = Rvalue, I = Ivalue)
     in
        dft( N, X )
