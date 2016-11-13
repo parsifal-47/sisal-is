@@ -3,7 +3,7 @@ var assert = buster.referee.assert;
 var fs = require("fs");
 
 function checkDir(path) {
-    var exclude = ["unsorted_and_weird", "complex", "controversial"];
+    var exclude = ["if_something_has_to_be_excluded"];
     var data = fs.readdirSync(path);
     for (var i = 0; i<data.length; i++) {
         if (fs.lstatSync(path+data[i]).isDirectory()) {
@@ -23,12 +23,6 @@ function checkDir(path) {
 buster.testCase("Lex", {
     "trivial lex test": function () {
         AST = lex.parse("1");
-        assert.greater(AST.length, 0, "lex should reproduce non-empty program");
-    },
-    "simple function text": function () {
-        AST = lex.parse("function Main2( M,N : integer returns integer )\n" +
-                        "   M+N*M\n" +
-                        "end function");
         assert.greater(AST.length, 0, "lex should reproduce non-empty program");
     },
     "check all programs in examples folder": function () {
