@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "0.12"
+env:
+ - TASK=selfcheck
+
+script:
+ - case "$TASK" in
+     selfcheck) make test;;
+     *) make -C $TASK check;;
+   esac

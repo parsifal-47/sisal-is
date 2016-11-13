@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/parsifal-47/sisal-is/issues"
   },
-  "homepage": "https://github.com/parsifal-47/sisal-is#readme"
+  "homepage": "https://github.com/parsifal-47/sisal-is#readme",
+  "dependencies": {
+    "ident-adder": "git+https://git@github.com/parsifal-47/ident-adder.git"
+  },
+  "devDependencies" : {
+    "pegjs": "0.8.x",
+    "buster": "busterjs/buster"
+  }
 }
