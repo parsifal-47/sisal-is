@@ -15,15 +15,20 @@ function checkDir(path) {
         console.log(path+data[i]);
 
         var prog = fs.readFileSync(path+data[i]);
-        AST = lex.parse("" + prog);
-        assert.greater(AST.length, 0, "lex for ...");
+
+        try {
+            AST = lexer.parse(indenter("" + prog));
+            assert.greater(AST.length, 0, "lexer for ...");
+        } catch (Err) {
+            assert(false, "Script: " + path + data[i] + " Error: " + Err);
+        }
     }
 }
 
 buster.testCase("Lex", {
     "trivial lex test": function () {
-        AST = lex.parse("1");
-        assert.greater(AST.length, 0, "lex should reproduce non-empty program");
+        AST = lexer.parse(indenter("1"));
+        assert.greater(AST.length, 0, "lexer should reproduce non-empty program");
     },
     "check all programs in examples folder": function () {
         checkDir("examples/");
