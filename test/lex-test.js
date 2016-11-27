@@ -19,8 +19,11 @@ function checkDir(path) {
         try {
             AST = lexer.parse(indenter("" + prog));
             assert.greater(AST.length, 0, "lexer for ...");
-        } catch (Err) {
-            assert(false, "Script: " + path + data[i] + " Error: " + Err);
+        } catch (e) {
+            assert(false, "Script: " + path + data[i] +
+                (e.line ? " Line:" + e.line : "") +
+                (e.column ? " Column:" + e.column : "") +
+                " Error: " + e);
         }
     }
 }
