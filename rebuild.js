@@ -1,4 +1,7 @@
 /* nodejs only file which re-builds lex */
+/* This code is ugly and it could be replaced with browserify
+   because it does similar things, but browserify will produce
+   much more code, that is why this code is still there */
 
 var fs = require('fs');
 var PEG = require("pegjs");

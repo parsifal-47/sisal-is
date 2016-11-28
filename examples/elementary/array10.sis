@@ -1,3 +1,2 @@
 foo = f(A)
-   addh(A, 0)
-   addl(A, 1)
+   addl(addh(A, 0), 1)
