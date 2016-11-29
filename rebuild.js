@@ -22,7 +22,7 @@ fs.readFile('node_modules/indent-adder/index.js', 'utf8', function (err,data) {
   fs.writeFile('lib/indenter.js', '(function () {\n' +
                 data.replace("exports.", "var ") + "\n" +
                 "indenter = function(text) {\n" +
-                "return add_indents(text, '__INDENT__', '__DEDENT__',\n" +
+                "return add_indents(text, '__INDENT__', '__DEDENT__ ',\n" +
                 "'#', '\"\\'', '([', ')]')};})();", function (err) {
       if (err) return console.log(err);
       console.log('indenter has been rebuilt');
