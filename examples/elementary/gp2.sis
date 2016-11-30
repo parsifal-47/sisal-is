@@ -1,4 +1,5 @@
 foo = f(A)
-   for I in [1..100]
+   for I in [1 .. 200]
+   repeat
       A = addh(old A, 0)
    returns array of A
