@@ -11,14 +11,13 @@ The main difference between ordinary Sisal and this version that is does not req
 
 	Conv = f(M, A, N, X)
 	    for I in [1..N-M+1]
-	    returns array of 
-			for J in [1..M]
+	    returns array of for J in [1..M]
 			returns sum of A[J] * X[I+J-1]
 
 	Main = f(M, Cycles)
 	    let
-			A = for I in [1..M] returns array of double(I)
-			X = for I in [1..M] * Cycles returns array of double(I)
+			A = for I in [1..M] returns array of I
+			X = for I in [1.. M * Cycles] returns array of I
 	    in
 			Conv( M, A, M * Cycles, X )
 

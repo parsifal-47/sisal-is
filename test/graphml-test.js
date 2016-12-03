@@ -3,7 +3,7 @@ var assert = buster.referee.assert;
 var fs = require("fs");
 
 function checkDir(path) {
-    var exclude = ["if_something_need_to_be_excluded"];
+    var exclude = ["complex"];
     var data = fs.readdirSync(path);
     for (var i = 0; i<data.length; i++) {
         if (fs.lstatSync(path+data[i]).isDirectory()) {
@@ -19,6 +19,9 @@ function checkDir(path) {
         try {
             AST = lexer.parse(indenter("" + prog));
             assert.greater(AST.length, 0, "lexer for ...");
+            var ir = new node.sisalir(AST);
+            var graph = ir.toGraphML(); 
+            assert.greater(graph.length, 0, "graphml generator for ...")
         } catch (e) {
             assert(false, "Script: " + path + data[i] +
                 (e.line ? " Line:" + e.line : "") +
@@ -28,13 +31,9 @@ function checkDir(path) {
     }
 }
 
-buster.testCase("Lex", {
-    "trivial lex test": function () {
-        AST = lexer.parse(indenter("1"));
-        assert.greater(AST.length, 0, "lexer should reproduce non-empty program");
-    },
+buster.testCase("GraphML", {
     "check all programs in examples folder": function () {
-        console.log("Starting lexer tests");
+        console.log("Starting toGraphML test");
         checkDir("examples/");
     }
 });
