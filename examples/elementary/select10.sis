@@ -1,8 +1,8 @@
 foo = f(a, b)
    let
     p = if ( a * b >= 0 )
-               a * b
-        else
-               0
+           a * b
+    else
+           0
    in
     p * p

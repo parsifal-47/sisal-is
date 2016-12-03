@@ -1,4 +1,4 @@
-Sisal with Ident-Syntax
+Sisal with Ident-Syntax [![Build Status](https://travis-ci.org/parsifal-47/sisal-is.svg?branch=master)](https://travis-ci.org/parsifal-47/sisal-is)
 ========
 
 Ident-based dialect for sisal with statically derived types

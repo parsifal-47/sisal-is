@@ -1,6 +1,6 @@
 foo = f(N)
    for initial
       i = 0
-      while (i<=N)
+   while (i<=N)
          i = old i + 1
-      returns value of i
+   returns value of i

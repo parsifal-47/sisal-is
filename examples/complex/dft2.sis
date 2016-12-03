@@ -8,28 +8,26 @@
 
 dft = f(N, X)
     let
-       Pi = 3.1415926535897932;
+       Pi = 3.1415926535897932
        Theta = (2.0 * Pi) / double(N)
     in
        for K in [1..N]
-           (Rdata,
-           Idata) := for J in [1..N]
+           Rdata,
+           Idata = for J in [1..N]
                          EArg = Theta * double(J-1) * double(K-1)
                          Er = cos(EArg)
                          Ei = sin(EArg)
                          Rvalue = (X[J].R * Er) - (X[J].I * Ei)
                          Ivalue = (X[J].I * Er) + (X[J].R * Ei)
-                         returns (sum of Rvalue
-                             sum of Ivalue)
+           returns sum of Rvalue, Ivalue
        returns array of (R = Rdata, I = Idata)
-
 
 Main = f(N)
     let
-       Pi = 3.1415926535897932D
+       Pi = 3.1415926535897932
        DRN = double(N)
        X = for J in [1..N]
-                  Rvalue = sin( (DRN * Pi) / 8.0 );
+                  Rvalue = sin( (DRN * Pi) / 8.0 )
                   Ivalue = 0.0
        returns array of (R = Rvalue, I = Ivalue)
     in
