@@ -1,0 +1,6 @@
+Main = f(M)
+  let
+    A = 1
+    B = 2
+  in
+    A + A
