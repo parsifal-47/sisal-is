@@ -52,6 +52,11 @@ or
 	make setup
 
 
+to generate GraphML:
+
+	node tographml <inputfile.sis> <outputfile.xml>
+
+
 to run tests:
 
 	make test
