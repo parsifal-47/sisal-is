@@ -9,6 +9,7 @@ A set of examples is available [here](examples/).
 
 The main difference between ordinary Sisal and this version that is does not require types to be explicitly specified and uses indents instead of *end function* stuff:
 
+```python
   Conv = f(M, A, N, X)
     for I in [1..N-M+1]
     returns array of for J in [1..M]
@@ -20,7 +21,7 @@ The main difference between ordinary Sisal and this version that is does not req
       X = for I in [1.. M * Cycles] returns array of I
     in
       Conv( M, A, M * Cycles, X )
-
+```
 
 ### Supported constraints
 
