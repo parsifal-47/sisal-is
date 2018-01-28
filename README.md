@@ -9,17 +9,17 @@ A set of examples is available [here](examples/).
 
 The main difference between ordinary Sisal and this version that is does not require types to be explicitly specified and uses indents instead of *end function* stuff:
 
-	Conv = f(M, A, N, X)
-	    for I in [1..N-M+1]
-	    returns array of for J in [1..M]
-			returns sum of A[J] * X[I+J-1]
+  Conv = f(M, A, N, X)
+    for I in [1..N-M+1]
+    returns array of for J in [1..M]
+        returns sum of A[J] * X[I+J-1]
 
-	Main = f(M, Cycles)
-	    let
-			A = for I in [1..M] returns array of I
-			X = for I in [1.. M * Cycles] returns array of I
-	    in
-			Conv( M, A, M * Cycles, X )
+  Main = f(M, Cycles)
+    let
+      A = for I in [1..M] returns array of I
+      X = for I in [1.. M * Cycles] returns array of I
+    in
+      Conv( M, A, M * Cycles, X )
 
 
 ### Supported constraints
@@ -45,26 +45,26 @@ The main difference between ordinary Sisal and this version that is does not req
 
 to setup:
 
-	npm install
+  npm install
 
 or
 
-	make setup
+  make setup
 
 
 to generate GraphML:
 
-	node tographml <inputfile.sis> <outputfile.xml>
+  node tographml <inputfile.sis> <outputfile.xml>
 
 
 to run tests:
 
-	make test
+  make test
 
 
 to rebuild lex:
 
-	make rebuild
+  make rebuild
 
 
 ### Feedback
