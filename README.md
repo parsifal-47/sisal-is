@@ -46,27 +46,33 @@ The main difference between ordinary Sisal and this version that is does not req
 
 to setup:
 
-  npm install
+```bash
+npm install
+```
 
 or
 
-  make setup
-
+```bash
+make setup
+```
 
 to generate GraphML:
 
-  node tographml <inputfile.sis> <outputfile.xml>
-
+```bash
+node tographml <inputfile.sis> <outputfile.xml>
+```
 
 to run tests:
 
-  make test
-
+```bash
+make test
+```
 
 to rebuild lex:
 
-  make rebuild
-
+```bash
+make rebuild
+```
 
 ### Feedback
 
