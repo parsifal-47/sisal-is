@@ -37,10 +37,8 @@ The main difference between ordinary Sisal and this version that is does not req
 - sin
 - cos
 - sqrt
-- random
-- double
-- print
-
+- pow
+- natural_numbers
 
 ### Deployment
 
