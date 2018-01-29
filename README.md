@@ -27,8 +27,11 @@ The main difference between ordinary Sisal and this version that is does not req
 
 - f (function)
 - let in
+- if elseif else
 - for in [at] returns
-- sum, min, max, array (reductions)
+- for while
+- for repeat
+- sum, product, array, value, max, min (reductions)
 - arithmetics + - * /
 
 
