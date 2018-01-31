@@ -23,6 +23,8 @@ The main difference between ordinary Sisal and this version that is does not req
       Conv( M, A, M * Cycles, X )
 ```
 
+Please read [language overview](overview.md) if you want to know more.
+
 ### Supported constraints
 
 - f (function)
@@ -31,7 +33,7 @@ The main difference between ordinary Sisal and this version that is does not req
 - for in [at] returns
 - for while
 - for repeat
-- sum, product, array, value, max, min (reductions)
+- sum, product, array, stream, value, max, min (reductions)
 - arithmetics + - * /
 
 
@@ -41,7 +43,7 @@ The main difference between ordinary Sisal and this version that is does not req
 - cos
 - sqrt
 - pow
-- natural_numbers
+
 
 ### Deployment
 
