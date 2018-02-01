@@ -1,8 +1,8 @@
-# Sisal-is
+# Sisal-IS
 
 Strongly-typed programming language with type inference. There are no side effects and no input in a form that most of us familiar with. Evaluation is lazy.
 
-Comparing to older Sisal versions it has lambdas and indent-based syntax.
+Comparing to older Sisal versions it has lambdas and indent-based syntax. Check [this](comparison.md) document if you want to see new vs old.
 
 ## Code blocks
 

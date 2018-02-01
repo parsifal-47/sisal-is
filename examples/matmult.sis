@@ -1,5 +1,5 @@
-main = f(A,B,M,N,L)
-  for i,j in [1..M],[1..L]
-  returns array of for k in [1..N]
-      R = A[i,k] * B[k,j]
-  returns sum of R
+main = f(a,b,m,n,l)
+  for i,j in [1..m],[1..l]
+  returns array of for k in [1..n]
+      r = a[i,k] * b[k,j]
+  returns sum of r

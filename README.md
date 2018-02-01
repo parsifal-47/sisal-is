@@ -5,8 +5,6 @@ Ident-based dialect for sisal with statically derived types
 
 ### How does it look like
 
-A set of examples is available [here](examples/).
-
 The main difference between ordinary Sisal and this version that is does not require types to be explicitly specified and uses indents instead of *end function* stuff:
 
 ```python
@@ -24,6 +22,8 @@ The main difference between ordinary Sisal and this version that is does not req
 ```
 
 Please read [language overview](overview.md) if you want to know more.
+
+A set of examples is available [here](examples/).
 
 ### Supported constraints
 
