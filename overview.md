@@ -1,4 +1,4 @@
-# Sisal-IS
+# Sisal-is
 
 Strongly-typed programming language with type inference. There are no side effects and no input in a form that most of us familiar with. Evaluation is lazy.
 

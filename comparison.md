@@ -1,6 +1,6 @@
 # Syntax comparison
 
-The example below is strait-forward matrix multiplication.
+The example below is straightforward matrix multiplication.
 
 ## Classic Sisal
 
@@ -16,7 +16,7 @@ function Main( A,B: array[array[real]];  M,N,L : integer returns array[array[rea
 end function
 ```
 
-## Sisal-IS
+## Sisal-is
 
 ```python
 main = f(a,b,m,n,l)
