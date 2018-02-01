@@ -83,6 +83,7 @@ main = f()
 ```python
 dub = f(a)
    a * 2
+
 main = f()
    2 + dub(3)
 ```
@@ -93,6 +94,7 @@ In case of single argument, function can be applied with `of` syntax.
 ```python
 dub = f(a)
    a * 2
+
 main = f()
    2 + dub of 3
 ```
