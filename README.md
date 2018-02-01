@@ -10,17 +10,17 @@ A set of examples is available [here](examples/).
 The main difference between ordinary Sisal and this version that is does not require types to be explicitly specified and uses indents instead of *end function* stuff:
 
 ```python
-  Conv = f(M, A, N, X)
-    for I in [1..N-M+1]
-    returns array of for J in [1..M]
-        returns sum of A[J] * X[I+J-1]
+  conv = f(m, a, n, x)
+    for i in [1..n-m+1]
+    returns array of for j in [1..m]
+        returns sum of a[j] * x[i+j-1]
 
-  Main = f(M, Cycles)
+  main = f(m, cycles)
     let
-      A = for I in [1..M] returns array of I
-      X = for I in [1.. M * Cycles] returns array of I
+      a = for i in [1.. m] returns array of i
+      x = for i in [1.. m * cycles] returns array of i
     in
-      Conv( M, A, M * Cycles, X )
+      conv( m, a, m * cycles, x )
 ```
 
 Please read [language overview](overview.md) if you want to know more.
