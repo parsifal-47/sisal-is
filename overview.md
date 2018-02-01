@@ -2,11 +2,11 @@
 
 Strongly-typed programming language with type inference. There are no side effects and no input in a form that most of us familiar with. Evaluation is lazy.
 
-Comparing to older Sisal versions it also has lambdas and indent-based syntax.
+Comparing to older Sisal versions it has lambdas and indent-based syntax.
 
 ## Code blocks
 
-The main way to express nesting is indents, but indents are ignored inside brackets:
+The main way to express nesting is indentation, but indentation is ignored inside brackets:
 
 ```python
 1 + ( 2 +
@@ -31,8 +31,8 @@ f() {2}
 
 ## Primitive data types
 
-Three base types are currently supported: signed integers, booleans and floats.
-Memory size of integer and float is at least 32 bits. Notation is traditional,
+Three primitive types are currently supported: signed integers, booleans and floats.
+Capacity of integer and float is at least 32 bits. Notation is traditional,
 hex numbers could be written as "0x...".
 
 ## Arithmetics
@@ -42,7 +42,7 @@ hex numbers could be written as "0x...".
 ## Function definition
 
 `f()` is defining a function. Inside of parenthesis a list of arguments is followed by
-`returns` keyword and a list of return values.
+`returns` keyword and a list of return types.
 
 ```python
 f(returns integer)
@@ -73,7 +73,7 @@ f(a: integer, b: integer returns integer)
 ## Sisal program
 
 Program is a sequence of definitions, it is equal to first inner block of `let` operator
-with one exception: function named `main` is invoked.
+with one exception: definition `main` is invoked as a function.
 
 ```python
 main = f()
@@ -128,9 +128,10 @@ Contains named fields. Datatype is defined as `record[name1: type1, name2: type2
 
 ### stream
 
-This type is almost equal to `array`, except it could be infinite. Datatype is defined as `stream[<element_type>]`. Value of this type could be defined as stream([2, 3, 4]). Here function `stream` converts `array` into `stream`.
+This type is almost equal to `array`, except it could be infinite. Datatype is defined as `stream[<element_type>]`. Value of this type could be defined as stream([2, 3, 4]). Where function `stream` converts `array` into `stream`.
 
 ### function
+
 Function datatype is defined as `function[<argument1_type>, ... [returns <return1_type>, ...]]`. Function value is defined with the following syntax:
 
 ```python
@@ -147,7 +148,7 @@ a = function[integer returns integer]
 
 ## Bindings (let)
 
-For better readability the following statement is supported:
+Usually bindings serve better readability, the following statement is supported:
 
 ```python
 main = f(m)
@@ -181,15 +182,14 @@ foo = f(a, b)
 ```
 
 ## Loops
-The most distinctive part of Sisal is loops. Body of each loop contains list of bindings which is equal to `let` operator, loop ends with reduction, it describes how values from loop iterations will be aggregated.
+The most distinctive part of Sisal is loop definition. Body of each loop contains list of bindings which is equal to `let` operator, loop ends with reduction, it describes how values from loop iterations are aggregated.
 
 Loops could contain initialization block and references to previous iterations with `old` keyword.
 
 ### Reductions
-Built-in reductions are `sum`, `product`, `array`, `stream`, `value`, `max`, `min`.
-Any user function which takes single stream argument could be used as a reduction.
 
-Multiple reductions are supported, they are specified with comma.
+Built-in reductions are `sum`, `product`, `array`, `stream`, `value`, `max`, `min`.
+Any user function which takes single stream argument could be used as a reduction. Recursive reductions are allowed.
 
 ### Range loops
 
@@ -217,12 +217,12 @@ Multi-dimensional ranges are supported:
 
 ```python
 main = f(A)
-  for i,j in [1..100],[1..100]
+  for i,j in [1 .. 100],[1 .. 100]
      s = A[i, j]
   returns stream of s
 ```
 
-### Preconditional loops
+### Pre-conditional loops
 Condition is evaluated before the first iteration.
 
 ```python
@@ -245,7 +245,7 @@ foo = f(N, T, S)
    returns value of i
 ```
 
-### Postconditional loops
+### Post-conditional loops
 
 ```python
 length = f(N)
@@ -280,9 +280,10 @@ foo = f(N, T)
 ## Type casting
 Types are converted with the following polymorphic functions:
 
-- `integer` -- converts other primitive types and string to integer
-- `double` -- converts other primitive types and string to double
-- `string` -- converts primitive types to string
+- `integer` -- converts other primitive types and string to integer.
+- `double` -- converts other primitive types and string to double.
+- `string` -- converts primitive types to string.
+- `stream` -- converts array to stream.
 
 ## Range generators
 
@@ -304,4 +305,4 @@ main = f()
 
 ## Interaction with external world
 
-Sisal program is interacting by getting values as input arguments, streams should be used in of case interactive application. Please refer to specific interpreter or compiler for details.
+Sisal program is getting values as input arguments, streams should be used in of case interactive application. Please refer to specific interpreter or compiler for the details.
