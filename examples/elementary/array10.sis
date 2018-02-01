@@ -1,2 +1,2 @@
-foo = f(A)
-   addl(addh(A, 0), 1)
+foo = f(a)
+   addl(addh(a, 0), 1)

@@ -1,2 +1,2 @@
-foo = f(A, N)
-   A[N]
+foo = f(a, n)
+   a[n]

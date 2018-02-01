@@ -1,5 +1,5 @@
-main = f(N)
+main = f(n)
    let
-      A = [ [N, N, N], [N, N, N], [N, N, N] ]
+      a = [ [n, n, n], [n, n, n], [n, n, n] ]
    in
-      A[2]
+      a[2]

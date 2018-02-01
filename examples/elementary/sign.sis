@@ -1,4 +1,4 @@
-sgn = f(N)
+sign = f(N)
   if N > 0
     1
   elseif N < 0

@@ -1,2 +1,2 @@
-main = f(A, N)
-  A[N-1,N+1]
+main = f(a, n)
+  a[n-1,n+1]

@@ -1,5 +1,5 @@
 foo = f()
    let
-      A = [1, 2, 3]
+      a = [1, 2, 3]
    in
-      addh(A, 4)
+      addh(a, 4)

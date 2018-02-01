@@ -1,5 +1,5 @@
-main = f(A)
+main = f(a)
   let
-   B = remh(A)
+   b = remh(a)
   in
-   B
+   b

@@ -1,2 +1,2 @@
-main = f(A)
-   A[1]
+main = f(a)
+   a[1]

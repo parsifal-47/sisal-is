@@ -1,4 +1,4 @@
-Main = f(M)
+main = f(M)
   let
     a = 0
     b = 0
