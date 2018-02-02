@@ -35,5 +35,6 @@ buster.testCase("Lex", {
   "check all programs in examples folder" : function() {
     console.log("Starting lexer tests");
     checkDir("examples/");
+    checkDir("test/programs/");
   }
 });
