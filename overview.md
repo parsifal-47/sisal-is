@@ -286,6 +286,7 @@ Types are converted with the following polymorphic functions:
 - `double` -- converts other primitive types and string to double.
 - `string` -- converts primitive types to string.
 - `stream` -- converts array to stream.
+- `type` -- converts value to its type.
 
 ## Range generators
 
