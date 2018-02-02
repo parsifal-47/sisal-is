@@ -1,7 +1,7 @@
 {
   "name": "sisal-is",
   "version": "0.1.0",
-  "description": "Sisal-ident-based",
+  "description": "Modernized dialect of Sisal",
   "main": "index.js",
   "directories": {
     "example": "examples"
@@ -14,8 +14,10 @@
     "url": "git+https://github.com/parsifal-47/sisal-is.git"
   },
   "keywords": [
-    "Sisal",
-    "compiler",
+    "sisal",
+    "interpreter",
+    "streams",
+    "dataflow",
     "functional"
   ],
   "author": "Renat Idrisov",
