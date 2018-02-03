@@ -283,7 +283,7 @@ foo = f(N, T)
 Types are converted with the following polymorphic functions:
 
 - `integer` -- converts other primitive types and string to integer.
-- `double` -- converts other primitive types and string to double.
+- `float` -- converts other primitive types and string to float.
 - `string` -- converts primitive types to string.
 - `stream` -- converts array to stream.
 - `type` -- converts value to its type.
@@ -294,7 +294,7 @@ List of natural numbers could be generated with special syntax: `[2..100]`. Left
 
 ## Standard library
 
-`sin`, `cos`, `sqrt`, `pow` -- accepting and returning double values.
+`sin`, `cos`, `sqrt`, `pow` -- accepting and returning float values.
 
 ## Modularity
 
