@@ -27,11 +27,13 @@
   },
   "homepage": "https://github.com/parsifal-47/sisal-is#readme",
   "dependencies": {
-    "pegjs": "0.8.x",
+    "@types/node": "^9.4.0",
+    "@types/pegjs": "^0.10.0",
     "indent-adder": "0.1.x",
+    "pegjs": "^0.10.0",
     "typescript": "2.7.1"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "buster": "busterjs/buster"
   }
 }
