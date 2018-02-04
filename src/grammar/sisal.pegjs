@@ -266,7 +266,7 @@ RecordValue
 
 StreamValue
   = "[" __ lowerBound:Expression __ ".." __ upperBound:Expression? __ "]"  {
-    return {type: "Stream", lower: lowerBound, upper: upperBound };
+    return {type: "Stream", lowerBound: lowerBound, upperBound: upperBound };
   }
 
 FunctionValue
@@ -351,7 +351,7 @@ LogicalOperation
       var result = head;
       for (var i = 0; i < tail.length; i++) {
         result = {
-          type:     "BinaryExpression",
+          type:     "Binary",
           operator: tail[i][1],
           left:     result,
           right:    tail[i][3]
@@ -374,7 +374,7 @@ Compare
       var result = head;
       for (var i = 0; i < tail.length; i++) {
         result = {
-          type:     "BinaryExpression",
+          type:     "Binary",
           operator: tail[i][1],
           left:     result,
           right:    tail[i][3]
@@ -393,7 +393,7 @@ LowPriorityOperation
       var result = head;
       for (var i = 0; i < tail.length; i++) {
         result = {
-          type:     "BinaryExpression",
+          type:     "Binary",
           operator: tail[i][1],
           left:     result,
           right:    tail[i][3]
@@ -413,7 +413,7 @@ HighPriorityOperation
       var result = head;
       for (var i = 0; i < tail.length; i++) {
         result = {
-          type:     "BinaryExpression",
+          type:     "Binary",
           operator: tail[i][1],
           left:     result,
           right:    tail[i][3]
@@ -429,7 +429,7 @@ UnaryOperator
 
 UnaryOperation
   = operation:UnaryOperator __ operand:UnaryOperation {
-    return {type: "Unary", operation: operation, operand: operand};
+    return {type: "Unary", operator: operation, right: operand};
   }
   / PostfixOperation
 
@@ -437,16 +437,16 @@ PostfixOperation
   = base:Operand
     args:(
      __ "(" __ arguments:ExpressionList? __ ")" {
-       return {type: "FunctionCall", parameters: arguments };
+       return {type: "FunctionCall", arguments: arguments };
      }
      / __ "." __ name:Identifier {
        return {type: "RecordAccess", field: name };
      }
      / __ "[" __ expression:Expression __ "]" {
-       return {type: "ArrayAccess", contents: expressions};
+       return {type: "ArrayAccess", index: expression};
      }
      / __ "of" __ expression:Expression {
-       return {type: "FunctionCall", parameters: [expression]};
+       return {type: "FunctionCall", arguments: [expression]};
      }
     )* {
       if (args.length==0) return base;
@@ -454,10 +454,10 @@ PostfixOperation
       var result = {
           type: "Postfix",
           base: base,
-          opList: []
+          operationList: []
         };
       for (var i = 0; i < args.length; i++) {
-        result.opList.push(args[i]);
+        result.operationList.push(args[i]);
       }
       return result;
     }
@@ -535,9 +535,9 @@ IfExpression
     return {
       type: "If",
       condition: condition,
-      then: thenBranch,
+      thenBranch: thenBranch,
       elseifs: elseIfs,
-      else: elseBranch
+      elseBranch: elseBranch
     };
   }
 
@@ -552,25 +552,29 @@ ElseIfs
     }
 
 ElseIf
-  = ElseIfToken __ condition:Expression __ thenBranch:WrappedExpressions {
-    return {type: "If", condition: condition, then: thenBranch, else: null, elseifs: null};
+  = ElseIfToken __ condition:Expression __ branch:WrappedExpressions {
+    return {
+      type: "ElseIf",
+      condition: condition,
+      branch: branch
+    };
   }
 
 LoopExpression
   = LoopToken __
     range:RangeGenerator?
     init:LoopInit?
-    precondition:LoopCondition?
+    preCondition:LoopCondition?
     (RepeatToken __)?
     body:WrappedExpressions?
-    postcondition:LoopCondition? __
+    postCondition:LoopCondition? __
     ReturnsToken __ returns:ExpressionList __ {
     return {
       type: "Loop",
       range: range,
       init: init,
-      precondition: precondition,
-      postcondition: postcondition,
+      preCondition: preCondition,
+      postCondition: postCondition,
       body: body,
       returns: returns
     };
@@ -588,5 +592,5 @@ LoopInit
 
 RangeGenerator
   = names:IdentifierList __ InToken __ ranges:ExpressionList __ {
-    return {type: "RangeList", names:names, ranges:ranges };
+    return {type: "RangeList", names: names, ranges: ranges };
   }
