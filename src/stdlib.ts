@@ -1,5 +1,4 @@
-import * as Api from "./ir1/api";
-import { Scope } from "./ir1/scope";
+import { Scope } from "./scope";
 
 export class StdLibBuilder {
   static build(): Scope {

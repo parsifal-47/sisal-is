@@ -1,3 +1,24 @@
+{
+  function makeList(initial, tail, num) {
+    for (var i = 0; i < tail.length; i++) {
+      initial.push(tail[i][num]);
+    }
+    return initial;
+  }
+  function makeBinary(head, tail) {
+    var result = head;
+    for (var i = 0; i < tail.length; i++) {
+      result = {
+        type:     "Binary",
+        operator: tail[i][1],
+        left:     result,
+        right:    tail[i][3]
+      };
+    }
+    return result;
+  }
+}
+
 start
   = __ program:DefinitionList __ { return program; }
 
@@ -299,17 +320,17 @@ PrimitiveType
   }
 
 StreamType
-  = StreamToken __ "[" __ type: Expression __ "]" {
+  = StreamToken __ "[" __ type:Expression __ "]" {
     return {type: "Type", name: "Stream", elementType: type };
   }
 
 ArrayType
-  = ArrayToken __ "[" __ type: Expression __ "]" {
+  = ArrayToken __ "[" __ type:Expression __ "]" {
     return {type: "Type", name: "Array", elementType: type };
   }
 
 RecordType
-  = RecordToken __ "[" __ fields: IdsWithOptionalTypes __ "]" {
+  = RecordToken __ "[" __ fields:IdsWithOptionalTypes __ "]" {
     return {type: "Type", name: "Record", fields: fields };
   }
 
@@ -322,11 +343,7 @@ FunctionType
 IdsWithOptionalTypes
   = head:IdWithOptionalType
     tail:(__ "," __ IdWithOptionalType)* {
-      var result = [head];
-      for (var i = 0; i < tail.length; i++) {
-        result.push(tail[i][3]);
-      }
-      return result;
+      return makeList([head], tail, 3);
     }
 
 IdWithOptionalType
@@ -348,16 +365,7 @@ LogicalOperator
 LogicalOperation
   = head:Compare
     tail:(__ LogicalOperator __ Compare)* {
-      var result = head;
-      for (var i = 0; i < tail.length; i++) {
-        result = {
-          type:     "Binary",
-          operator: tail[i][1],
-          left:     result,
-          right:    tail[i][3]
-        };
-      }
-      return result;
+      return makeBinary(head, tail);
     }
 
 CompareOperator
@@ -371,16 +379,7 @@ CompareOperator
 Compare
   = head:LowPriorityOperation
     tail:(__ CompareOperator __ LowPriorityOperation)* {
-      var result = head;
-      for (var i = 0; i < tail.length; i++) {
-        result = {
-          type:     "Binary",
-          operator: tail[i][1],
-          left:     result,
-          right:    tail[i][3]
-        };
-      }
-      return result;
+      return makeBinary(head, tail);
     }
 
 LowPriorityOperator
@@ -390,16 +389,7 @@ LowPriorityOperator
 LowPriorityOperation
   = head:HighPriorityOperation
     tail:(__ LowPriorityOperator __ HighPriorityOperation)* {
-      var result = head;
-      for (var i = 0; i < tail.length; i++) {
-        result = {
-          type:     "Binary",
-          operator: tail[i][1],
-          left:     result,
-          right:    tail[i][3]
-        };
-      }
-      return result;
+      return makeBinary(head, tail);
     }
 
 HighPriorityOperator
@@ -410,16 +400,7 @@ HighPriorityOperator
 HighPriorityOperation
   = head:UnaryOperation
     tail:(__ HighPriorityOperator __ UnaryOperation)* {
-      var result = head;
-      for (var i = 0; i < tail.length; i++) {
-        result = {
-          type:     "Binary",
-          operator: tail[i][1],
-          left:     result,
-          right:    tail[i][3]
-        };
-      }
-      return result;
+      return makeBinary(head, tail);
     }
 
 UnaryOperator
@@ -469,11 +450,7 @@ PostfixOperation
 ExpressionList
   = head:Expression
     tail:(__ "," __ Expression)* {
-      var result = [head];
-      for (var i = 0; i < tail.length; i++) {
-        result.push(tail[i][3]);
-      }
-      return result;
+      return makeList([head], tail, 3);
     }
 
 /*  Operands    */
@@ -507,26 +484,18 @@ WrappedExpressions
 DefinitionList
   = head:Definition
     tail:(__ Definition)* {
-      var result = [head];
-      for (var i = 0; i < tail.length; i++) {
-        result.push(tail[i][1]);
-      }
-      return result;
+      return makeList([head], tail, 1);
     }
 
 Definition
-  = left:LValue __ "=" __ right:Expression {
+  = left:LValue __ "=" __ right:ExpressionList {
     return {type: "Definition", left: left, right: right};
   }
 
 LValue
   = head:Identifier
     tail:(__ "," __ Identifier)* {
-      var result = [head];
-      for (var i = 0; i < tail.length; i++) {
-        result.push(tail[i][3]);
-      }
-      return result;
+      return makeList([head], tail, 3);
     }
 
 IfExpression
@@ -544,11 +513,7 @@ IfExpression
 ElseIfs
   = head:ElseIf
     tail:(__ ElseIf)* {
-      var result = [head];
-      for (var i = 0; i < tail.length; i++) {
-        result.push(tail[i][1]);
-      }
-      return result;
+      return makeList([head], tail, 1);
     }
 
 ElseIf
