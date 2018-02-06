@@ -1,4 +1,5 @@
 import { Node } from "./node";
+import { Expression } from "./expression";
 
 export interface Definition extends Node {
   left: string[];

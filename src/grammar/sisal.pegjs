@@ -348,7 +348,7 @@ IdsWithOptionalTypes
 
 IdWithOptionalType
   = id:Identifier __ type:(":" __ Expression __)? {
-    return {type: "WeaklyTypedIdentifier", name: id, type: (type ? type[2]: null) };
+    return {type: "WeaklyTypedIdentifier", name: id, dataType: (type ? type[2]: null) };
   }
 
 /* Expressions */

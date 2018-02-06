@@ -14,7 +14,7 @@ export function isFunctionValue(node: Node): node is FunctionValue {
 
 export interface IdWithOptionalType extends Node {
   id: string;
-  type?: Expression;
+  dataType?: Expression;
 }
 
 export function isIdWithOptionalType(node: Node): node is IdWithOptionalType {

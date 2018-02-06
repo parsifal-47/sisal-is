@@ -6,6 +6,6 @@ export interface FunctionType extends TypeValue {
   returns: Expression[];
 }
 
-export function isStreamType(node: TypeValue): node is FunctionType {
+export function isFunctionType(node: TypeValue): node is FunctionType {
   return node.name === "Function";
 }

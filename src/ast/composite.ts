@@ -1,6 +1,8 @@
 import { Node } from "./node";
 import { Definition } from "./definition";
 import { Expression } from "./expression";
+import { FunctionValue } from "./function";
+import { TypeValue } from "./types/value";
 
 export type CompositeValue = ArrayValue | RecordValue |
                              StreamValue | FunctionValue | TypeValue;

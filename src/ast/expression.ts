@@ -1,4 +1,5 @@
 import { Node } from "./node";
+import { Operand } from "./operand";
 
 export type Expression = BinaryExpression | UnaryExpression | Postfix | Operand;
 

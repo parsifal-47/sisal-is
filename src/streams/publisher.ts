@@ -1,6 +1,6 @@
 import { Subscriber } from "./subscriber"
 
 export interface Publisher {
-  requestData: () => void;
+  requestData: (dataType: Type) => void;
   subscribe: (subscriber: Subscriber) => void;
 }

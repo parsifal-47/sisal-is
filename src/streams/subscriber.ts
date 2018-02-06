@@ -1,4 +1,4 @@
-import { Value } from "./value"
+import { Value } from "../ir1/value"
 
 export interface Subscriber {
   next: (value: Value) => void;
