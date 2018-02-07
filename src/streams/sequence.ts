@@ -1,17 +1,20 @@
 import { Publisher } from "./publisher"
+import { Subscriber } from "./subscriber"
+import { ReadyValue } from "../ir1/values/ready"
+import { ReadyType } from "../ir1/types/ready"
 
 export class SequencePublisher implements Publisher {
   private subscribers: Subscriber[];
-  private data: Value.Value;
+  private data: ReadyValue;
 
-  public constructor(data: Value.Value) {
+  public constructor(data: ReadyValue) {
     this.data = data;
     this.subscribers = [];
   }
 
-  public requestData() {
+  public requestData(type: ReadyType) {
     for (let sub of this.subscribers) {
-      sub.next(data);
+      sub.next(this.data);
       sub.complete();
     }
   }

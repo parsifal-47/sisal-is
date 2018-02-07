@@ -24,34 +24,34 @@ export function nodeFromExpression(expression: AST.Expression, scope: Scope): No
     return new ArrayValue(expression, scope);
   }
   if (AST.isStreamValue(expression)) {
-    return new StreamValue(expression);
+    return new StreamValue(expression, scope);
   }
   if (AST.isRecordValue(expression)) {
-    return new RecordValue(expression);
+    return new RecordValue(expression, scope);
   }
   if (ASTTypes.isTypeValue(expression)) {
-    return new TypeValue(expression);
+    return new TypeValue(expression, scope);
   }
   if (AST.isBinaryExpression(expression)) {
-    return new BinaryExpression(expression);
+    return new BinaryExpression(expression, scope);
   }
   if (AST.isUnaryExpression(expression)) {
-    return new UnaryExpression(expression);
+    return new UnaryExpression(expression, scope);
   }
   if (AST.isPostfix(expression)) {
     return nodeFromPostfix(expression, scope);
   }
   if (AST.isOldValue(expression)) {
-    return new OldValue(expression);
+    return new OldValue(expression, scope);
   }
   if (AST.isLetExpression(expression)) {
-    return new LetExpression(expression);
+    return new LetExpression(expression, scope);
   }
   if (AST.isLoopExpression(expression)) {
-    return new LoopExpression(expression);
+    return new LoopExpression(expression, scope);
   }
   if (AST.isIfExpression(expression)) {
-    return new IfExpression(expression);
+    return new IfExpression(expression, scope);
   }
 
   throw new Error("Unexpected expression type in create " + JSON.stringify(expression));

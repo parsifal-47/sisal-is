@@ -1,6 +1,6 @@
-import { Value } from "../ir1/value"
+import { ReadyValue } from "../ir1/values/ready"
 
 export interface Subscriber {
-  next: (value: Value) => void;
+  next: (value: ReadyValue) => void;
   complete: () => void;
 }

@@ -1,6 +1,9 @@
 import { Publisher } from "./publisher"
+import { Subscriber } from "./subscriber"
+import { ReadyType } from "../ir1/types/ready"
+import { Scope } from "../ir1/scope"
 
-export class LookupPublisher implements Publisher {
+export class LookupPublisher implements Publisher, Subscriber {
   private subscribers: Subscriber[];
   private scope: Scope;
   private name: string;
@@ -11,10 +14,18 @@ export class LookupPublisher implements Publisher {
     this.subscribers = [];
   }
 
-  public requestData(type: Type) {
-    const data = this.scope.lookup(this.name, type);
+  public requestData(type: ReadyType) {
+    this.scope.resolve(this, this.name, type);
+  }
+
+  public next(data: ReadyValue) {
     for (let sub of this.subscribers) {
       sub.next(data);
+    }
+  }
+
+  public complete() {
+    for (let sub of this.subscribers) {
       sub.complete();
     }
   }
