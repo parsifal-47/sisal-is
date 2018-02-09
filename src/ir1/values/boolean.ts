@@ -3,8 +3,8 @@ import { ReadyValue } from "./ready";
 
 export class Boolean extends ReadyValue {
   public value: boolean;
-  public constructor(n: number) {
+  public constructor(value: boolean) {
     super(new Types.Boolean());
-    this.value = n;
+    this.value = value;
   }
 }

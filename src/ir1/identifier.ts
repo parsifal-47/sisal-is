@@ -1,13 +1,13 @@
 import { Node } from "./node"
 import { Scope } from "./scope"
-import { LookupPublisher } from "../streams/lookup";
+import { StreamPort } from "./ports/stream";
 
 export class Identifier extends Node {
   private scope: Scope;
 
   public constructor(name: string, scope: Scope) {
-    super(name);
-    this.outPorts = [new LookupPublisher(name, scope)];
-    this.scope = scope;
+    super("Identifier");
+    this.outPorts = [new StreamPort(
+      (type: ReadyType, offset: number) => this.scope.resolve(name, type, offset))];
   }
 }

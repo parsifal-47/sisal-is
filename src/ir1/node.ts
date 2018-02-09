@@ -1,16 +1,15 @@
-import { Subscriber } from "../streams/subscriber"
-import { Publisher } from "../streams/publisher"
+import { DataSource } from "../streams/source"
 
 export class Node {
   name: string;
   location: string;
-  inPorts: Subscriber[];
-  outPorts: Publisher[];
+  outPorts: Port[];
+  inPorts: Port[];
 
   constructor(name: string) {
     this.name = name;
     this.location = "unknown";
-    this.inPorts = [];
     this.outPorts = [];
+    this.inPorts = [];
   }
 }

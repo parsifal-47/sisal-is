@@ -88,12 +88,7 @@ Keyword
 
 Literal
   = BooleanLiteral
-  / value:NumericLiteral {
-      return {
-        type:  "NumericLiteral",
-        value: value
-      };
-    }
+  / NumericLiteral
   / value:StringLiteral {
       return {
         type:  "StringLiteral",
@@ -114,13 +109,34 @@ DecimalLiteral
   = before:DecimalIntegerLiteral
     after:("." DecimalDigits)?
     exponent:ExponentPart? {
-      return parseFloat(before + "." + (after!== null ? after : "")  + exponent);
+      if (after !== null || exponent !== null) {
+        return {
+          type: "FloatLiteral",
+          value: parseFloat(before + "." + (after!== null ? after : "")  + exponent)
+        };
+      }
+      return {
+        type: "IntegerLiteral",
+        value: parseInt(before)
+      };
     }
   / "." after:DecimalDigits exponent:ExponentPart? {
-      return parseFloat("." + after + exponent);
+      return {
+        type: "FloatLiteral",
+        value: parseFloat("." + after + exponent)
+      };
     }
   / before:DecimalIntegerLiteral exponent:ExponentPart? {
-      return parseFloat(before + exponent);
+      if (exponent !== null) {
+        return {
+          type: "FloatLiteral",
+          value: parseFloat(before + exponent)
+        };
+      }
+      return {
+        type: "IntegerLiteral",
+        value: parseInt(before)
+      };
     }
 
 DecimalIntegerLiteral

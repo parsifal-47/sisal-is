@@ -10,7 +10,7 @@ export class Function extends ReadyType {
     this.returns = returns;
   }
   public toString() {
-    const getNames = (subtypes) => subtypes.map((e) => e.toString()).join(", ");
-    return "Function[" + getNames(this.params) + " returns " + getNames(this.returns) "]";
+    let getNames = (subtypes) => subtypes.map((e) => e.toString()).join(", ");
+    return "Function[" + getNames(this.params) + " returns " + getNames(this.returns) + "]";
   }
 }

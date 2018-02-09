@@ -1,5 +1,6 @@
 import { Node } from "./node";
 import { ReadyType } from "./types/ready";
+import { Subscriber } from "../streams/subscriber";
 import { nodeFromExpression } from "./create";
 import * as AST from "../ast";
 
@@ -56,7 +57,7 @@ export class LibraryScope extends Scope {
   constructor(parent: Scope, defintions: Map<string, Node[]>) {
     super(parent);
     definitions.forEach((nodes: Node[], key: string) => {
-      this.defintions.set(key, nodes.map((n) => {node: n, port: 0}));
+      this.defintions.set(key, nodes.map((n) => ({node: n, port: 0})));
     });
   }
 }

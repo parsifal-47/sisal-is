@@ -3,8 +3,8 @@ import { ReadyValue } from "./ready";
 
 export class Integer extends ReadyValue {
   public value: number;
-  public constructor(n: number) {
+  public constructor(value: number) {
     super(new Types.Integer());
-    this.value = n;
+    this.value = value;
   }
 }
