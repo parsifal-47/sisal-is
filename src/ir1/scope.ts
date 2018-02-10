@@ -1,6 +1,6 @@
 import * as AST from "../ast";
 import { nodeFromExpression } from "./create";
-import { Node } from "./node";
+import { Node } from "./nodes/node";
 import { Port } from "./ports/port";
 import * as Types from "./types";
 import { ReadyType } from "./types/ready";

@@ -1,4 +1,4 @@
-import { Port } from "./ports/port";
+import { Port } from "../ports/port";
 
 export class Node {
   public name: string;

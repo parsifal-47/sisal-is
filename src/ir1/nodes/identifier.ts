@@ -1,7 +1,7 @@
 import { Node } from "./node";
-import { StreamPort } from "./ports/stream";
-import { Scope } from "./scope";
-import { ReadyType } from "./types/ready";
+import { StreamPort } from "../ports/stream";
+import { Scope } from "../scope";
+import { ReadyType } from "../types/ready";
 
 export class Identifier extends Node {
   public constructor(name: string, scope: Scope) {

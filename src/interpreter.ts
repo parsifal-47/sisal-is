@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { add_indents } from "indent-adder";
 import * as PEG from "pegjs";
 import * as AST from "./ast";
-import * as Ir1 from "./ir1";
+import { createFromAST } from "./ir1/scope";
 import { StdLibBuilder } from "./stdlib";
 
 export class Interpreter {
@@ -13,7 +13,7 @@ export class Interpreter {
   }
   public run(program: string): void {
     const stdLib = StdLibBuilder.build();
-    const scope = Ir1.createFromAST(stdLib, this.parse(program));
+    const scope = createFromAST(stdLib, this.parse(program));
     // subscribe to outports
     // wait finish
   }

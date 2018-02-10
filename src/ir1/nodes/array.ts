@@ -1,11 +1,11 @@
-import * as AST from "../ast/composite";
-import { nodeFromExpression } from "./create";
+import * as AST from "../../ast/composite";
+import { nodeFromExpression } from "../create";
 import { Node } from "./node";
-import { SingleValuePort } from "./ports/single";
-import { Scope } from "./scope";
-import * as Types from "./types";
-import { checkType } from "./types/check";
-import * as Values from "./values";
+import { SingleValuePort } from "../ports/single";
+import { Scope } from "../scope";
+import * as Types from "../types";
+import { checkType } from "../types/check";
+import * as Values from "../values";
 
 export class ArrayValue extends Node {
   private nodes: Node[];

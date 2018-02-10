@@ -1,11 +1,10 @@
-import * as AST from "../ast/composite";
-import { nodeFromExpression } from "./create";
+import * as AST from "../../ast/composite";
+import { nodeFromExpression } from "../create";
 import { Node } from "./node";
-import { StreamPort } from "./ports/stream";
-import { Scope } from "./scope";
-import * as Types from "./types";
-import { checkType } from "./types/check";
-import * as Values from "./values";
+import { StreamPort } from "../ports/stream";
+import { Scope } from "../scope";
+import * as Types from "../types";
+import * as Values from "../values";
 
 export class StreamValue extends Node {
   private nodes: Node[];
@@ -32,7 +31,7 @@ export class StreamValue extends Node {
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {
-    if (!checkType(new Types.Stream(new Types.Some()), dataType)) {
+    if (!Types.checkType(new Types.Stream(new Types.Some()), dataType)) {
       return new Values.ErrorValue("Incompartible type, not stream");
     }
     if (!this.leftBound) {

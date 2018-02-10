@@ -1,10 +1,10 @@
-import * as AST from "../ast";
-import { nodeFromExpression } from "./create";
+import * as AST from "../../ast";
+import { nodeFromExpression } from "../create";
 import { Node } from "./node";
-import { StreamPort } from "./ports/stream";
-import { Scope } from "./scope";
-import * as Types from "./types";
-import * as Values from "./values";
+import { StreamPort } from "../ports/stream";
+import { Scope } from "../scope";
+import * as Types from "../types";
+import * as Values from "../values";
 
 export class BinaryExpression extends Node {
   private nodes: Node[];
