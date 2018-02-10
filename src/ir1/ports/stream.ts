@@ -5,12 +5,12 @@ import { Port } from "./port"
 type dataFetchFunction = (dataType: ReadyType, offset: number) => ReadyValue;
 
 export class StreamPort implements Port {
-  private node:
   private data: ReadyValue[];
   private fetchData: dataFetchFunction;
 
   public constructor(fetchData: dataFetchFunction) {
     this.fetchData = fetchData;
+    this.data = [];
   }
 
   public getData(dataType: ReadyType, offset?: number): ReadyValue {

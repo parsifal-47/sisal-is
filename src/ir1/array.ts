@@ -3,6 +3,8 @@ import * as AST from "../ast/composite";
 import { SingleValuePort } from "./ports/single"
 import { nodeFromExpression } from "./create";
 import { Scope } from "./scope"
+import * as Types from "./types";
+import * as Values from "./values";
 
 export class ArrayValue extends Node {
   private nodes: Node[];
@@ -14,7 +16,7 @@ export class ArrayValue extends Node {
       this.nodes.push(nodeFromExpression(expression, scope));
     }
 
-    for (let node in nodes) {
+    for (let node in this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }
@@ -24,24 +26,24 @@ export class ArrayValue extends Node {
     this.outPorts = [new SingleValuePort(this.fetchData)];
   }
 
-  public fetchData(type: ReadyType): ReadyValue {
-    if (!checkType(new ArrayType(new Some()), type)) {
-      return new ErrorValue("Incompartible type, not array");
+  public fetchData(type: Types.ReadyType): Values.ReadyValue {
+    if (!checkType(new Types.Array(new Types.Some()), type)) {
+      return new Values.ErrorValue("Incompartible type, not array");
     }
 
-    let results: ReadyValue[] = [];
-    let subType: ReadyType;
+    let results: Values.ReadyValue[] = [];
+    let subType: Types.ReadyType;
 
-    if (type instanceof ArrayType) {
-      subType = type.elementType;
+    if (type instanceof Types.Array) {
+      subType = type.element;
     } else {
-      subType = new Some();
+      subType = new Types.Some();
     }
 
     for (let port in this.inPorts) {
       results.push(fetchComplete(port, subType));
     }
 
-    return new Array(results);
+    return new Values.Array(results);
   }
 }

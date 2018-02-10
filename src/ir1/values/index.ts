@@ -6,3 +6,4 @@ export * from "./integer";
 export * from "./ready";
 export * from "./stream";
 export * from "./string";
+export * from "./type";

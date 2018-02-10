@@ -3,8 +3,11 @@ import * as AST from "../ast/composite";
 import { SingleValuePort } from "./ports/single"
 import { nodeFromExpression } from "./create";
 import { Scope } from "./scope"
+import { ReadyType } from "./types/ready";
+import { ReadyValue } from "./values/ready";
+import { ErrorValue } from "./values/error";
 
-export class ArrayValue extends Node {
+export class RecordValue extends Node {
   private nodes: Node[];
 
   constructor(record: AST.RecordValue, scope: Scope) {

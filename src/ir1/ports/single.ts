@@ -5,7 +5,6 @@ import { Port } from "./port"
 type dataFetchFunction = (dataType: ReadyType) => ReadyValue;
 
 export class SingleValuePort implements Port {
-  private node:
   private data?: ReadyValue;
   private fetchData: dataFetchFunction;
 

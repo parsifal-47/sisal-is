@@ -27,13 +27,13 @@ export class Literal extends Node {
       throw new Error("Unexpected literal type " + JSON.stringify(defintion));
     }
 
-    this.outPorts.push(new SingleValuePort((dataType: ReadyType) => value));
+    this.outPorts.push(new SingleValuePort((dataType: Types.ReadyType) => value));
   }
 }
 
 export class LiteralType extends Node {
 
-  constructor(defintion: AST.PrimitiveType) {
+  constructor(defintion: ASTTypes.PrimitiveType) {
     super("TypeLiteral");
 
     let value: Values.ReadyValue;
@@ -50,6 +50,6 @@ export class LiteralType extends Node {
       throw new Error("Unexpected literal type type " + JSON.stringify(defintion));
     }
 
-    this.outPorts.push(new SingleValuePort((dataType: ReadyType) => value));
+    this.outPorts.push(new SingleValuePort((dataType: Types.ReadyType) => value));
   }
 }

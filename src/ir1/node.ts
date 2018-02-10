@@ -1,4 +1,4 @@
-import { DataSource } from "../streams/source"
+import { Port } from "./ports/port"
 
 export class Node {
   name: string;

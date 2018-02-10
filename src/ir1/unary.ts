@@ -2,7 +2,9 @@ import { StreamPort } from "./ports/stream"
 import { Node } from "./node"
 import * as Values from "./values";
 import * as Types from "./types";
-import * as AST from "../ast/literal";
+import * as AST from "../ast";
+import { nodeFromExpression } from "./create";
+import { Scope } from "./scope";
 
 export class UnaryExpression extends Node {
   private nodes: Node[];
@@ -24,42 +26,42 @@ export class UnaryExpression extends Node {
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {
-    const right: ReadyValue = this.inPorts[0].getData(dataType, offset);
+    const right = this.inPorts[0].getData(dataType, offset);
 
-    return processOperation(right);
+    return this.processOperation(right);
   }
 
   private processOperation(value: Values.ReadyValue): Values.ReadyValue {
-    if (value.type instanceof Types.Integer) {
+    if (value instanceof Values.Integer) {
       if (this.operator == "-") {
-        return new Types.Integer(-value.value);
+        return new Values.Integer(-value.value);
       }
       if (this.operator == "+") {
         return value;
       }
     }
 
-    if (value.type instanceof Types.Float) {
+    if (value instanceof Values.Float) {
       if (this.operator == "-") {
-        return new Types.Float(-value.value);
+        return new Values.Float(-value.value);
       }
       if (this.operator == "+") {
         return value;
       }
     }
 
-    if (value.type instanceof Types.Boolean) {
+    if (value instanceof Values.Boolean) {
       if (this.operator == "!") {
-        return new Types.Boolean(!value.value);
+        return new Values.Boolean(!value.value);
       }
     }
 
-    if (value instanceof Types.StreamEnd) {
-      return left;
+    if (value instanceof Values.StreamEnd) {
+      return value;
     }
 
-    if (value instanceof Types.StreamElement) {
-      return new Types.StreamElement(this.processOperation(value.value));
+    if (value instanceof Values.StreamElement) {
+      return new Values.StreamElement(this.processOperation(value.value));
     }
 
     return new Values.ErrorValue("Unsupported types " + value.type.name);

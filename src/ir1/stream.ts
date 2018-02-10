@@ -3,9 +3,13 @@ import { Scope } from "./scope"
 import { StreamPort } from "./ports/stream"
 import { nodeFromExpression } from "./create";
 import * as AST from "../ast/composite";
+import * as Types from "./types";
+import * as Values from "./values";
 
 export class StreamValue extends Node {
   private nodes: Node[];
+  private leftBound?: Values.Integer;
+  private rightBound?: Values.Integer;
 
   constructor(defintion: AST.StreamValue, scope: Scope) {
     super("StreamValue");
@@ -16,7 +20,7 @@ export class StreamValue extends Node {
       this.nodes.push(nodeFromExpression(defintion.upperBound, scope));
     }
 
-    for (let node in nodes) {
+    for (let node in this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }
@@ -27,13 +31,13 @@ export class StreamValue extends Node {
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {
-    if (!checkType(new Types.Stream(new Some()), dataType)) {
-      return new ErrorValue("Incompartible type, not stream");
+    if (!checkType(new Types.Stream(new Types.Some()), dataType)) {
+      return new Values.ErrorValue("Incompartible type, not stream");
     }
     if (!this.leftBound) {
-      this.leftBound = this.inPorts[0].getData(new Types.Integer());
+      this.leftBound = this.inPorts[0].getData(new Types.Integer()) as Values.Integer;
       if (this.inPorts.length > 1) {
-        this.rightBound = this.inPorts[1].getData(new Types.Integer());
+        this.rightBound = this.inPorts[1].getData(new Types.Integer()) as Values.Integer;
       }
     }
     if (this.rightBound && (this.leftBound.value + offset >= this.rightBound.value)) {
