@@ -1,9 +1,9 @@
 import * as AST from "../../ast";
 import * as ASTTypes from "../../ast/types";
-import { Node } from "./node";
 import { SingleValuePort } from "../ports/single";
 import * as Types from "../types";
 import * as Values from "../values";
+import { Node } from "./node";
 
 export class Literal extends Node {
 

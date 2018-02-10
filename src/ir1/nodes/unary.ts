@@ -1,10 +1,10 @@
 import * as AST from "../../ast";
 import { nodeFromExpression } from "../create";
-import { Node } from "./node";
 import { StreamPort } from "../ports/stream";
 import { Scope } from "../scope";
 import * as Types from "../types";
 import * as Values from "../values";
+import { Node } from "./node";
 
 export class UnaryExpression extends Node {
   private nodes: Node[];
@@ -17,10 +17,7 @@ export class UnaryExpression extends Node {
     this.nodes = [];
     this.nodes.push(nodeFromExpression(definition.right, scope));
 
-    if (this.nodes[0].outPorts.length !== 1) {
-      throw new Error("Binary operand should produce exactly one output");
-    }
-    this.inPorts.push(this.nodes[0].outPorts[0]);
+    this.addInPorts(this.nodes);
 
     this.outPorts.push(new StreamPort(this.fetchData));
   }

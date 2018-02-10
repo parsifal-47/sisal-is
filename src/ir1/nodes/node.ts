@@ -12,4 +12,13 @@ export class Node {
     this.outPorts = [];
     this.inPorts = [];
   }
+
+  addInPorts(nodes: Node[]): void {
+    for (const node of nodes) {
+      if (node.outPorts.length !== 1) {
+        throw new Error("Each part should produce exactly one output");
+      }
+      this.inPorts.push(node.outPorts[0]);
+    }
+  }
 }

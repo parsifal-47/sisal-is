@@ -1,7 +1,7 @@
 import * as AST from "../ast";
 import * as ASTTypes from "../ast/types";
-import * as Nodes from "./nodes"
-import * as TypeNodes from "./nodes/types"
+import * as Nodes from "./nodes";
+import * as TypeNodes from "./nodes/types";
 import { Scope } from "./scope";
 
 function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Nodes.Node {
@@ -15,16 +15,16 @@ function nodeFromTypeValue(node: ASTTypes.TypeValue, scope: Scope): Nodes.Node {
     return new TypeNodes.LiteralType(node);
   }
   if (ASTTypes.isArrayType(node)) {
-    return new TypeNodes.ArrayType(node);
+    return new TypeNodes.ArrayType(node, scope);
   }
   if (ASTTypes.isFunctionType(node)) {
-    return new TypeNodes.FunctionType(node);
+    return new TypeNodes.FunctionType(node, scope);
   }
   if (ASTTypes.isRecordType(node)) {
-    return new TypeNodes.RecordType(node);
+    return new TypeNodes.RecordType(node, scope);
   }
   if (ASTTypes.isStreamType(node)) {
-    return new TypeNodes.StreamType(node);
+    return new TypeNodes.StreamType(node, scope);
   }
   throw new Error("Unexpected expression type value " + JSON.stringify(node));
 }
@@ -68,6 +68,9 @@ export function nodeFromExpression(expression: AST.Expression, scope: Scope): No
   }
   if (AST.isIfExpression(expression)) {
     return new Nodes.IfExpression(expression, scope);
+  }
+  if (AST.isFunctionValue(expression)) {
+    return new Nodes.FunctionValue(expression, scope);
   }
   throw new Error("Unexpected expression type in create " + JSON.stringify(expression));
 }
