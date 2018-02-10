@@ -18,7 +18,7 @@ export class BinaryExpression extends Node {
     this.nodes.push(nodeFromExpression(definition.left, scope));
     this.nodes.push(nodeFromExpression(definition.right, scope));
 
-    for (let node in this.nodes) {
+    for (let node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Binary operand should produce exactly one output");
       }

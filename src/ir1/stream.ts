@@ -5,6 +5,7 @@ import { nodeFromExpression } from "./create";
 import * as AST from "../ast/composite";
 import * as Types from "./types";
 import * as Values from "./values";
+import { checkType } from "./types/check"
 
 export class StreamValue extends Node {
   private nodes: Node[];
@@ -20,7 +21,7 @@ export class StreamValue extends Node {
       this.nodes.push(nodeFromExpression(defintion.upperBound, scope));
     }
 
-    for (let node in this.nodes) {
+    for (let node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }

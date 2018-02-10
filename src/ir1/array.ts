@@ -5,6 +5,7 @@ import { nodeFromExpression } from "./create";
 import { Scope } from "./scope"
 import * as Types from "./types";
 import * as Values from "./values";
+import { checkType } from "./types/check"
 
 export class ArrayValue extends Node {
   private nodes: Node[];
@@ -12,11 +13,11 @@ export class ArrayValue extends Node {
   constructor(defintion: AST.ArrayValue, scope: Scope) {
     super("Array");
     this.nodes = [];
-    for (let expression in defintion.contents) {
+    for (let expression of defintion.contents) {
       this.nodes.push(nodeFromExpression(expression, scope));
     }
 
-    for (let node in this.nodes) {
+    for (let node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }
@@ -40,8 +41,8 @@ export class ArrayValue extends Node {
       subType = new Types.Some();
     }
 
-    for (let port in this.inPorts) {
-      results.push(fetchComplete(port, subType));
+    for (let port of this.inPorts) {
+      results.push(Values.fetchComplete(port, subType));
     }
 
     return new Values.Array(results);

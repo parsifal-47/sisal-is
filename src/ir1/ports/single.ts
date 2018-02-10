@@ -1,6 +1,7 @@
 import { ReadyType } from "../types/ready"
 import { ReadyValue } from "../values/ready"
 import { Port } from "./port"
+import { checkType } from "../types/check"
 
 type dataFetchFunction = (dataType: ReadyType) => ReadyValue;
 

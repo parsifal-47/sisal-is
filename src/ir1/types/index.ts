@@ -1,5 +1,6 @@
 export * from "./array";
 export * from "./boolean";
+export * from "./check";
 export * from "./error";
 export * from "./float";
 export * from "./function";
