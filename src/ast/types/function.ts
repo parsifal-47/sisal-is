@@ -1,5 +1,5 @@
-import { TypeValue } from "./value";
 import { Expression } from "../expression";
+import { TypeValue } from "./value";
 
 export interface FunctionType extends TypeValue {
   params: Expression[];

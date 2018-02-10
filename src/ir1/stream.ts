@@ -1,11 +1,11 @@
-import { Node } from "./node"
-import { Scope } from "./scope"
-import { StreamPort } from "./ports/stream"
-import { nodeFromExpression } from "./create";
 import * as AST from "../ast/composite";
+import { nodeFromExpression } from "./create";
+import { Node } from "./node";
+import { StreamPort } from "./ports/stream";
+import { Scope } from "./scope";
 import * as Types from "./types";
+import { checkType } from "./types/check";
 import * as Values from "./values";
-import { checkType } from "./types/check"
 
 export class StreamValue extends Node {
   private nodes: Node[];
@@ -21,7 +21,7 @@ export class StreamValue extends Node {
       this.nodes.push(nodeFromExpression(defintion.upperBound, scope));
     }
 
-    for (let node of this.nodes) {
+    for (const node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }

@@ -1,5 +1,5 @@
-import { TypeValue } from "./value";
 import { Expression } from "../expression";
+import { TypeValue } from "./value";
 
 export interface ArrayType extends TypeValue {
   elementType: Expression;

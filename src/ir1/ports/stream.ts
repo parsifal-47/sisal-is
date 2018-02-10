@@ -1,7 +1,7 @@
-import { ReadyType } from "../types/ready"
-import { ReadyValue } from "../values/ready"
-import { Port } from "./port"
-import { checkType } from "../types/check"
+import { checkType } from "../types/check";
+import { ReadyType } from "../types/ready";
+import { ReadyValue } from "../values/ready";
+import { Port } from "./port";
 
 type dataFetchFunction = (dataType: ReadyType, offset: number) => ReadyValue;
 

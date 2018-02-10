@@ -1,6 +1,6 @@
-import { Node } from "./node"
-import { Scope } from "./scope"
+import { Node } from "./node";
 import { StreamPort } from "./ports/stream";
+import { Scope } from "./scope";
 import { ReadyType } from "./types/ready";
 
 export class Identifier extends Node {

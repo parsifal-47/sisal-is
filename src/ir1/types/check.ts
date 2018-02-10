@@ -1,7 +1,7 @@
+import { Array } from "./array";
 import { ReadyType } from "./ready";
 import { Some } from "./some";
 import { Stream } from "./stream";
-import { Array } from "./array";
 
 export function checkType(checked: ReadyType, requested: ReadyType): boolean {
   if (requested instanceof Some) {

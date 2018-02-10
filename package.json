@@ -31,9 +31,11 @@
     "@types/pegjs": "^0.10.0",
     "indent-adder": "0.1.x",
     "pegjs": "^0.10.0",
-    "typescript": "2.7.1"
   },
   "devDependencies": {
-    "buster": "busterjs/buster"
+    "buster": "busterjs/buster",
+    "tslint": "^5.9.1",
+    "tsutils": "^2.21.0",
+    "typescript": "^2.7.1"
   }
 }

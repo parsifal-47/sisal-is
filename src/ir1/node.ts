@@ -1,10 +1,10 @@
-import { Port } from "./ports/port"
+import { Port } from "./ports/port";
 
 export class Node {
-  name: string;
-  location: string;
-  outPorts: Port[];
-  inPorts: Port[];
+  public name: string;
+  public location: string;
+  public outPorts: Port[];
+  public inPorts: Port[];
 
   constructor(name: string) {
     this.name = name;

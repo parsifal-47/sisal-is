@@ -1,5 +1,5 @@
-import { TypeValue } from "./value";
 import { IdWithOptionalType } from "../function";
+import { TypeValue } from "./value";
 
 export interface RecordType extends TypeValue {
   fields: IdWithOptionalType[];

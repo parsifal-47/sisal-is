@@ -1,7 +1,7 @@
 import { ReadyType } from "../types/ready";
 
 export class ReadyValue {
-  type: ReadyType;
+  public type: ReadyType;
   constructor(type: ReadyType) {
     this.type = type;
   }

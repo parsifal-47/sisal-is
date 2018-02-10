@@ -1,11 +1,11 @@
-import { Node } from "./node"
 import * as AST from "../ast/composite";
-import { SingleValuePort } from "./ports/single"
 import { nodeFromExpression } from "./create";
-import { Scope } from "./scope"
+import { Node } from "./node";
+import { SingleValuePort } from "./ports/single";
+import { Scope } from "./scope";
 import * as Types from "./types";
+import { checkType } from "./types/check";
 import * as Values from "./values";
-import { checkType } from "./types/check"
 
 export class ArrayValue extends Node {
   private nodes: Node[];
@@ -13,11 +13,11 @@ export class ArrayValue extends Node {
   constructor(defintion: AST.ArrayValue, scope: Scope) {
     super("Array");
     this.nodes = [];
-    for (let expression of defintion.contents) {
+    for (const expression of defintion.contents) {
       this.nodes.push(nodeFromExpression(expression, scope));
     }
 
-    for (let node of this.nodes) {
+    for (const node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Array literal part should produce exactly one output");
       }
@@ -32,7 +32,7 @@ export class ArrayValue extends Node {
       return new Values.ErrorValue("Incompartible type, not array");
     }
 
-    let results: Values.ReadyValue[] = [];
+    const results: Values.ReadyValue[] = [];
     let subType: Types.ReadyType;
 
     if (type instanceof Types.Array) {
@@ -41,7 +41,7 @@ export class ArrayValue extends Node {
       subType = new Types.Some();
     }
 
-    for (let port of this.inPorts) {
+    for (const port of this.inPorts) {
       results.push(Values.fetchComplete(port, subType));
     }
 

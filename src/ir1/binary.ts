@@ -1,10 +1,10 @@
-import { StreamPort } from "./ports/stream"
-import { Node } from "./node"
-import { nodeFromExpression } from "./create";
-import * as Values from "./values";
-import * as Types from "./types";
 import * as AST from "../ast";
+import { nodeFromExpression } from "./create";
+import { Node } from "./node";
+import { StreamPort } from "./ports/stream";
 import { Scope } from "./scope";
+import * as Types from "./types";
+import * as Values from "./values";
 
 export class BinaryExpression extends Node {
   private nodes: Node[];
@@ -18,7 +18,7 @@ export class BinaryExpression extends Node {
     this.nodes.push(nodeFromExpression(definition.left, scope));
     this.nodes.push(nodeFromExpression(definition.right, scope));
 
-    for (let node of this.nodes) {
+    for (const node of this.nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Binary operand should produce exactly one output");
       }
@@ -106,10 +106,10 @@ export class BinaryExpression extends Node {
       return new Values.Boolean(left.value >= right.value);
     }
     if (this.operator === "=") {
-      return new Values.Boolean(left.value == right.value);
+      return new Values.Boolean(left.value === right.value);
     }
     if (this.operator === "/=") {
-      return new Values.Boolean(left.value != right.value);
+      return new Values.Boolean(left.value !== right.value);
     }
     return new Values.ErrorValue("Unknown operation " + this.operator);
   }
@@ -140,10 +140,10 @@ export class BinaryExpression extends Node {
       return new Values.Boolean(left.value >= right.value);
     }
     if (this.operator === "=") {
-      return new Values.Boolean(left.value == right.value);
+      return new Values.Boolean(left.value === right.value);
     }
     if (this.operator === "/=") {
-      return new Values.Boolean(left.value != right.value);
+      return new Values.Boolean(left.value !== right.value);
     }
     return new Values.ErrorValue("Unknown operation " + this.operator);
   }

@@ -1,12 +1,13 @@
 import * as AST from "../ast";
 import * as ASTTypes from "../ast/types";
-import { Node } from "./node";
-import { Identifier } from "./identifier";
 import { ArrayValue } from "./array";
 import { BinaryExpression } from "./binary";
-import { StreamValue } from "./stream";
-import { Literal, LiteralType } from "./literal";
+import { Identifier } from "./identifier";
+import { Literal } from "./literal";
+import { LiteralType } from "./literalType";
+import { Node } from "./node";
 import { Scope } from "./scope";
+import { StreamValue } from "./stream";
 
 function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Node {
   // TODO: add operationList

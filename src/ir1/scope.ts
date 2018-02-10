@@ -1,63 +1,64 @@
-import { Node } from "./node";
-import { ReadyType } from "./types/ready";
-import { Subscriber } from "../streams/subscriber";
-import { nodeFromExpression } from "./create";
 import * as AST from "../ast";
-
-interface NodeWithPort {
-  node: Node;
-  port: number;
-}
+import { nodeFromExpression } from "./create";
+import { Node } from "./node";
+import { Port } from "./ports/port";
+import * as Types from "./types";
+import { ReadyType } from "./types/ready";
+import * as Values from "./values";
 
 export class Scope {
-  private parentScope?: Scope;
-  private defintions: Map<string, NodeWithPort[]>;
+  public parentScope?: Scope;
+  public definitions: Map<string, Port[]>;
 
   public constructor(parent: Scope | undefined) {
     this.parentScope = parent;
-    this.defintions = new Map();
+    this.definitions = new Map();
   }
 
-  public resolve(subscriber: Subscriber, name: string, type: ReadyType): Node {
-    if (this.defintions.has(name)) {
-      return this.defintions.get(name).node;
+  public resolve(name: string, type: Types.ReadyType, offset: number): Values.ReadyValue {
+    if (this.definitions.has(name)) {
+      const candidates = this.definitions.get(name);
+      for (const port of candidates!) {
+        const value = port.getData(new Types.Some(), offset);
+        if (Types.checkType(value.type, type)) {
+          return value;
+        }
+      }
     }
     if (!this.parentScope) {
-      throw new Error("Cannot resolve name " + name);
+      return new Values.ErrorValue("Cannot resolve name " + name);
     }
-    return this.parentScope.resolve(name);
+    return this.parentScope.resolve(name, type, offset);
   }
 }
 
-export class ProgramScope extends Scope {
-  constructor(parent: Scope, definitions: AST.Definition[]) {
-    super(parent);
-    for (let d in definitions) {
-      if (d.left.length !== d.right.length && d.right.length !== 1) {
-        throw new Error("Definition arity doesn't match");
+export function createFromAST(parent: Scope, definitions: AST.Definition[]): Scope {
+  const scope = new Scope(parent);
+  for (const d of definitions) {
+    if (d.left.length !== d.right.length && d.right.length !== 1) {
+      throw new Error("Definition arity doesn't match");
+    }
+    const expressions = d.right.map((e) => nodeFromExpression(e, parent));
+    for (let i = 0; i < d.left.length; i++) {
+      let currentDefinitions: Port[] = [];
+      if (scope.definitions.has(d.left[i])) {
+        currentDefinitions = scope.definitions.get(d.left[i])!;
       }
-      let expressions = d.right.map((e) => nodeFromExpression(e));
-      for (let i = 0; i < d.left.length; i++) {
-        let currentDefinitions: NodeWithPort[] = [];
-        if (this.defintions.has(d.name)) {
-          currentDefinitions = this.defintions.get(d.name);
-        }
-        if (expressions.length === 1) {
-          currentDefinitions.push({node: expressions[0], port: i});
-        } else {
-          currentDefinitions.push({node: expressions[i], port: 0});
-        }
-        this.defintions.set(d.name, currentDefinitions);
+      if (expressions.length === 1) {
+        currentDefinitions.push(expressions[0].outPorts[i]);
+      } else {
+        currentDefinitions.push(expressions[i].outPorts[0]);
       }
+      scope.definitions.set(d.left[i], currentDefinitions);
     }
   }
+  return scope;
 }
 
-export class LibraryScope extends Scope {
-  constructor(parent: Scope, defintions: Map<string, Node[]>) {
-    super(parent);
-    definitions.forEach((nodes: Node[], key: string) => {
-      this.defintions.set(key, nodes.map((n) => ({node: n, port: 0})));
-    });
-  }
+export function createFromMap(parent: Scope, definitions: Map<string, Node[]>): Scope {
+  const scope = new Scope(parent);
+  definitions.forEach((nodes: Node[], key: string) => {
+    scope.definitions.set(key, nodes.map((n) => n.outPorts[0]));
+  });
+  return scope;
 }

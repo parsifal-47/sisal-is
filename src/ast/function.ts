@@ -1,6 +1,6 @@
-import { Node } from "./node";
 import { Definition } from "./definition";
 import { Expression } from "./expression";
+import { Node } from "./node";
 
 export interface FunctionValue extends Node {
   params: IdWithOptionalType[];

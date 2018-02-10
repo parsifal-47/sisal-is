@@ -1,10 +1,10 @@
-import { StreamPort } from "./ports/stream"
-import { Node } from "./node"
-import * as Values from "./values";
-import * as Types from "./types";
 import * as AST from "../ast";
 import { nodeFromExpression } from "./create";
+import { Node } from "./node";
+import { StreamPort } from "./ports/stream";
 import { Scope } from "./scope";
+import * as Types from "./types";
+import * as Values from "./values";
 
 export class UnaryExpression extends Node {
   private nodes: Node[];
@@ -33,25 +33,25 @@ export class UnaryExpression extends Node {
 
   private processOperation(value: Values.ReadyValue): Values.ReadyValue {
     if (value instanceof Values.Integer) {
-      if (this.operator == "-") {
+      if (this.operator === "-") {
         return new Values.Integer(-value.value);
       }
-      if (this.operator == "+") {
+      if (this.operator === "+") {
         return value;
       }
     }
 
     if (value instanceof Values.Float) {
-      if (this.operator == "-") {
+      if (this.operator === "-") {
         return new Values.Float(-value.value);
       }
-      if (this.operator == "+") {
+      if (this.operator === "+") {
         return value;
       }
     }
 
     if (value instanceof Values.Boolean) {
-      if (this.operator == "!") {
+      if (this.operator === "!") {
         return new Values.Boolean(!value.value);
       }
     }

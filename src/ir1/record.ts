@@ -1,11 +1,11 @@
-import { Node } from "./node"
 import * as AST from "../ast/composite";
-import { SingleValuePort } from "./ports/single"
 import { nodeFromExpression } from "./create";
-import { Scope } from "./scope"
+import { Node } from "./node";
+import { SingleValuePort } from "./ports/single";
+import { Scope } from "./scope";
 import { ReadyType } from "./types/ready";
-import { ReadyValue } from "./values/ready";
 import { ErrorValue } from "./values/error";
+import { ReadyValue } from "./values/ready";
 
 export class RecordValue extends Node {
   private nodes: Node[];
@@ -13,8 +13,6 @@ export class RecordValue extends Node {
   constructor(record: AST.RecordValue, scope: Scope) {
     super("Record");
     this.nodes = [];
-    for (let defintion in record.contents) {
-    }
 
     this.outPorts = [new SingleValuePort(this.fetchData)];
   }
