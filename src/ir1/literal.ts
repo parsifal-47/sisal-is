@@ -1,7 +1,9 @@
 import { SingleValuePort } from "./ports/single"
 import { Node } from "./node"
 import * as Values from "./values";
+import * as Types from "./types";
 import * as AST from "../ast";
+import * as ASTTypes from "../ast/types";
 
 export class Literal extends Node {
 
@@ -23,6 +25,29 @@ export class Literal extends Node {
       value = new Values.String(defintion.value);
     } else {
       throw new Error("Unexpected literal type " + JSON.stringify(defintion));
+    }
+
+    this.outPorts.push(new SingleValuePort((dataType: ReadyType) => value));
+  }
+}
+
+export class LiteralType extends Node {
+
+  constructor(defintion: AST.PrimitiveType) {
+    super("TypeLiteral");
+
+    let value: Values.ReadyValue;
+
+    if (ASTTypes.isBooleanType(defintion)) {
+      value = new Values.Type(new Types.Boolean());
+    } else if (ASTTypes.isIntegerType(defintion)) {
+      value = new Values.Type(new Types.Integer());
+    } else if (ASTTypes.isFloatType(defintion)) {
+      value = new Values.Type(new Types.Float());
+    } else if (ASTTypes.isStringType(defintion)) {
+      value = new Values.Type(new Types.String());
+    } else {
+      throw new Error("Unexpected literal type type " + JSON.stringify(defintion));
     }
 
     this.outPorts.push(new SingleValuePort((dataType: ReadyType) => value));

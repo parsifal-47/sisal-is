@@ -5,12 +5,32 @@ import { Identifier } from "./identifier";
 import { ArrayValue } from "./array";
 import { BinaryExpression } from "./binary";
 import { StreamValue } from "./stream";
-import { Literal } from "./literal";
+import { Literal, LiteralType } from "./literal";
 import { Scope } from "./scope";
 
-export function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Node {
+function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Node {
   // TODO: add operationList
   return nodeFromExpression(postfix.base, scope);
+}
+
+function nodeFromTypeValue(node: ASTTypes.TypeValue, scope: Scope): Node {
+  if (ASTTypes.isIntegerType(node) || ASTTypes.isFloatType(node) ||
+      ASTTypes.isBooleanType(node) || ASTTypes.isStringType(node)) {
+    return new LiteralType(node);
+  }
+  if (ASTTypes.isArrayType(node)) {
+    return new ArrayType(node);
+  }
+  if (ASTTypes.isFunctionType(node)) {
+    return new FunctionType(node);
+  }
+  if (ASTTypes.isRecordType(node)) {
+    return new RecordType(node);
+  }
+  if (ASTTypes.isStreamType(node)) {
+    return new StreamType(node);
+  }
+  throw new Error("Unexpected expression type value " + JSON.stringify(node));
 }
 
 export function nodeFromExpression(expression: AST.Expression, scope: Scope): Node {
@@ -30,7 +50,7 @@ export function nodeFromExpression(expression: AST.Expression, scope: Scope): No
     return new RecordValue(expression, scope);
   }
   if (ASTTypes.isTypeValue(expression)) {
-    return new TypeValue(expression, scope);
+    return nodeFromTypeValue(expression, scope);
   }
   if (AST.isBinaryExpression(expression)) {
     return new BinaryExpression(expression, scope);
