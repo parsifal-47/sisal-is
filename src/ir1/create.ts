@@ -53,6 +53,5 @@ export function nodeFromExpression(expression: AST.Expression, scope: Scope): No
   if (AST.isIfExpression(expression)) {
     return new IfExpression(expression, scope);
   }
-
   throw new Error("Unexpected expression type in create " + JSON.stringify(expression));
 }
