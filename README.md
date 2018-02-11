@@ -33,7 +33,6 @@ A set of examples is available [here](examples/).
 - for in [at] returns
 - for while
 - for repeat
-- sum, product, array, stream, value, max, min (reductions)
 - arithmetics + - * /
 
 
@@ -43,7 +42,7 @@ A set of examples is available [here](examples/).
 - cos
 - sqrt
 - pow
-
+- sum, product, array, stream, value, max, min (reductions)
 
 ### Deployment
 
