@@ -59,22 +59,22 @@ or
 make setup
 ```
 
-to generate GraphML:
-
-```bash
-node tographml <inputfile.sis> <outputfile.xml>
-```
-
 to run tests:
 
 ```bash
 make test
 ```
 
-to rebuild lex:
+to compile:
 
 ```bash
-make rebuild
+make compile
+```
+
+to run sisal program:
+
+```bash
+node ./build/sisal.js <program.sis>
 ```
 
 ### Feedback

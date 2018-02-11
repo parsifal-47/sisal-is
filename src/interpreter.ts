@@ -22,12 +22,24 @@ export class Interpreter {
     const value = scope.resolve("main", new Types.Some(), 0);
 
     if (value instanceof Values.ErrorValue) {
-      process.stdout.write("No main function defined");
+      process.stdout.write("No main function defined\n");
       return;
     }
     const main = value as Values.Function;
+    const type = main.type as Types.Function;
 
-    printPortData(main.nodes[0].outPorts[0]);
+    if (type.params.length > 0) {
+      process.stdout.write("Main function arguments are not supported\n");
+      return;
+    }
+
+    let outNumber = 0;
+    for (let node of main.nodes) {
+      for (let port of node.outPorts) {
+        process.stdout.write("Output #" + (outNumber++) + "\n");
+        printPortData(port);
+      }
+    }
   }
   private parse(program: string): AST.Definition[] {
     return this.parser.parse(add_indents(program, "{", "}", "#", "'\"", "([", ")]"));

@@ -2,7 +2,7 @@
   "name": "sisal-is",
   "version": "0.1.0",
   "description": "Modernized dialect of Sisal",
-  "main": "index.js",
+  "main": "./build/sisal.js",
   "directories": {
     "example": "examples"
   },
@@ -30,7 +30,7 @@
     "@types/node": "^9.4.0",
     "@types/pegjs": "^0.10.0",
     "indent-adder": "0.1.x",
-    "pegjs": "^0.10.0",
+    "pegjs": "^0.10.0"
   },
   "devDependencies": {
     "buster": "busterjs/buster",

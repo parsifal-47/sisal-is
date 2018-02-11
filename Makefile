@@ -1,18 +1,13 @@
 setup:
 	npm install
 
-rebuild:
-	node rebuild
-
-repl: run
-
-run:
-	node si
+compile:
+	tsc
 
 lint:
 	@./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts'
 
-test:
+test: setup compile
 	@./node_modules/buster/bin/buster-test
 
-.PHONY: test setup rebuild repl run
+.PHONY: test setup compile lint

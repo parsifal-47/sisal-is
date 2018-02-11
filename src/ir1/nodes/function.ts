@@ -45,7 +45,7 @@ export class FunctionValue extends Node {
     while (this.returns.length < this.nodes.length) {
       this.returns.push(new SomeType());
     }
-    this.outPorts.push(new SingleValuePort(this.fetchData));
+    this.outPorts.push(new SingleValuePort((type: Types.ReadyType) => this.fetchData(type)));
   }
 
   public fetchData(type: Types.ReadyType): Values.ReadyValue {
