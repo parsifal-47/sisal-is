@@ -30,7 +30,7 @@ A set of examples is available [here](examples/).
 - f (function)
 - let in
 - if elseif else
-- for in [at] returns
+- for in
 - for while
 - for repeat
 - arithmetics + - * /
