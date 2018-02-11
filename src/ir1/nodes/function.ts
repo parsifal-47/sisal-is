@@ -1,7 +1,7 @@
 import * as AST from "../../ast";
 import { nodeFromExpression } from "../create";
 import { SingleValuePort } from "../ports/single";
-import { createFromAST, Scope } from "../scope";
+import { Scope } from "../scope";
 import * as Types from "../types";
 import * as Values from "../values";
 import { Node } from "./node";
