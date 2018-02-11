@@ -7,7 +7,7 @@ export interface LoopExpression extends Node {
   init: Definition[];
   preCondition?: Expression;
   postCondition?: Expression;
-  body: Expression[];
+  body: Definition[];
   returns: Expression[];
 }
 

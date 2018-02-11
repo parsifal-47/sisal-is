@@ -1,5 +1,5 @@
 import { Node } from "../nodes/node";
-import { Scope } from "../scope";
+import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import { ReadyValue } from "./ready";
 

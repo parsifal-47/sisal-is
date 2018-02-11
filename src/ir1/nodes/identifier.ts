@@ -1,5 +1,5 @@
 import { StreamPort } from "../ports/stream";
-import { Scope } from "../scope";
+import { Scope } from "../scopes/scope";
 import { ReadyType } from "../types/ready";
 import { Node } from "./node";
 

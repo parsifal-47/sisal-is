@@ -6,6 +6,7 @@ export * from "./if";
 export * from "./ifBranch";
 export * from "./let";
 export * from "./literal";
+export * from "./loop";
 export * from "./node";
 export * from "./old";
 export * from "./record";

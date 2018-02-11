@@ -1,7 +1,8 @@
 import * as AST from "../../ast";
 import { nodeFromExpression } from "../create";
 import { SingleValuePort } from "../ports/single";
-import { Scope } from "../scope";
+import { Scope } from "../scopes/scope";
+import { FlatScope } from "../scopes/flat";
 import * as Types from "../types";
 import * as Values from "../values";
 import { Node } from "./node";
@@ -15,7 +16,7 @@ export class FunctionValue extends Node {
 
   constructor(definition: AST.FunctionValue, scope: Scope) {
     super("Lambda");
-    this.scope = new Scope(scope);
+    this.scope = new FlatScope(scope);
 
     this.nodes = [];
     for (const expression of definition.body) {

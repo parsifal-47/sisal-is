@@ -1,7 +1,7 @@
 import * as AST from "../../ast/composite";
 import { nodeFromExpression } from "../create";
 import { SingleValuePort } from "../ports/single";
-import { Scope } from "../scope";
+import { Scope } from "../scopes/scope";
 import { ReadyType } from "../types/ready";
 import { ErrorValue } from "../values/error";
 import { ReadyValue } from "../values/ready";

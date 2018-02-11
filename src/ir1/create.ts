@@ -2,7 +2,7 @@ import * as AST from "../ast";
 import * as ASTTypes from "../ast/types";
 import * as Nodes from "./nodes";
 import * as TypeNodes from "./nodes/types";
-import { Scope } from "./scope";
+import { Scope } from "./scopes/scope";
 
 function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Nodes.Node {
   // TODO: add operationList

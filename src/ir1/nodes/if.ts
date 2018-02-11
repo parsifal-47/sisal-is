@@ -1,7 +1,7 @@
 import * as AST from "../../ast";
 import { nodeFromExpression } from "../create";
 import { StreamPort } from "../ports/stream";
-import { Scope } from "../scope";
+import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import * as Values from "../values";
 import { IfBranch } from "./ifBranch";
