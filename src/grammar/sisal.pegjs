@@ -310,7 +310,12 @@ FunctionValue
   = FunctionToken __
     "(" __ params:IdsWithOptionalTypes? __
           returns:FunctionReturns? ")" __ body:FunctionBody {
-    return {type: "Lambda", params: params, returns: returns, body: body};
+    return {
+      type: "Lambda",
+      params: params ? params : [],
+      returns: returns ? returns : [],
+      body: body
+    };
   }
 
 FunctionBody
@@ -433,8 +438,8 @@ UnaryOperation
 PostfixOperation
   = base:Operand
     args:(
-     __ "(" __ arguments:ExpressionList? __ ")" {
-       return {type: "FunctionCall", arguments: arguments };
+     __ "(" __ expressions:ExpressionList? __ ")" {
+       return {type: "FunctionCall", arguments: expressions };
      }
      / __ "." __ name:Identifier {
        return {type: "RecordAccess", field: name };
@@ -521,7 +526,7 @@ IfExpression
       type: "If",
       condition: condition,
       thenBranch: thenBranch,
-      elseifs: elseIfs,
+      elseIfs: elseIfs ? elseIfs : [],
       elseBranch: elseBranch
     };
   }
@@ -572,6 +577,6 @@ LoopInit
   }
 
 RangeGenerator
-  = names:IdentifierList __ InToken __ ranges:ExpressionList __ {
+  = names:LValue __ InToken __ ranges:ExpressionList __ {
     return {type: "RangeList", names: names, ranges: ranges };
   }
