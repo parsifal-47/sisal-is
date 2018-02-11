@@ -9,6 +9,7 @@ import { Scope } from "./scope";
 
 export class FlatScope implements Scope {
   public parentScope?: Scope;
+  public oldScope?: Scope;
   public definitions: Map<string, Port[]>;
 
   public constructor(parent: Scope | undefined) {
@@ -17,6 +18,10 @@ export class FlatScope implements Scope {
   }
 
   public resolve(name: string, type: Types.ReadyType, offset: number): Values.ReadyValue {
+    if (offset === -1 && this.oldScope) {
+      return this.oldScope.resolve(name, type, 0);
+    }
+
     if (this.definitions.has(name)) {
       const candidates = this.definitions.get(name);
       for (const port of candidates!) {
@@ -52,6 +57,15 @@ export class FlatScope implements Scope {
         this.definitions.set(d.left[i], currentDefinitions);
       }
     }
+  }
+
+  public inject(name: string, port: Port) {
+    let currentDefinitions: Port[] = [];
+    if (this.definitions.has(name)) {
+      currentDefinitions = this.definitions.get(name)!;
+    }
+    currentDefinitions.push(port);
+    this.definitions.set(name, currentDefinitions);
   }
 }
 

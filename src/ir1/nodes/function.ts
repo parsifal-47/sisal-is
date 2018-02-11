@@ -1,8 +1,8 @@
 import * as AST from "../../ast";
 import { nodeFromExpression } from "../create";
 import { SingleValuePort } from "../ports/single";
-import { Scope } from "../scopes/scope";
 import { FlatScope } from "../scopes/flat";
+import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import * as Values from "../values";
 import { Node } from "./node";
