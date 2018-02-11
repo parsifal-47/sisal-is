@@ -8,7 +8,7 @@ export class Record extends ReadyType {
     this.elements = elements;
   }
   public toString() {
-    let names: string[] = [];
+    const names: string[] = [];
     this.elements.forEach((value: ReadyType, key: string) => {
       names.push(key + ": " + value.toString());
     });

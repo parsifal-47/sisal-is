@@ -13,7 +13,7 @@ export class Node {
     this.inPorts = [];
   }
 
-  addInPorts(nodes: Node[]): void {
+  public addInPorts(nodes: Node[]): void {
     for (const node of nodes) {
       if (node.outPorts.length !== 1) {
         throw new Error("Each part should produce exactly one output");

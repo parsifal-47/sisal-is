@@ -18,7 +18,7 @@ export class RecordType extends Node {
     this.nodes = [];
     this.names = [];
 
-    for (let field of defintion.fields) {
+    for (const field of defintion.fields) {
       this.names.push(field.id);
       if (field.dataType) {
         this.nodes.push(nodeFromExpression(field.dataType, scope));
