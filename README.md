@@ -3,7 +3,7 @@ Sisal with Ident-Syntax [![Build Status](https://travis-ci.org/parsifal-47/sisal
 
 Modernized dialect of Sisal with type inference!
 
-Current status: early alpha (some programs work but test coverage is very low)
+Current status: `early alpha` (some programs work but test coverage is very low)
 
 ### How does it look like
 
