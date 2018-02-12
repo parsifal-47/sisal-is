@@ -3,6 +3,8 @@ Sisal with Ident-Syntax [![Build Status](https://travis-ci.org/parsifal-47/sisal
 
 Modernized dialect of Sisal with type inference!
 
+Current status: early alpha (some programs work but test coverage is very low)
+
 ### How does it look like
 
 The main difference between ordinary Sisal and this version that is does not require types to be explicitly specified and uses indents instead of *end function* stuff:

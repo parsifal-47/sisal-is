@@ -14,7 +14,7 @@ export class Interpreter {
     const grammar = fs.readFileSync("src/grammar/sisal.pegjs", "utf8");
     this.parser = PEG.generate(grammar, { trackLineAndColumn: true } as PEG.ParserBuildOptions);
   }
-  public run(program: string): void {
+  public run(program: string): number {
     const stdLib = StdLibBuilder.build();
     const scope = new FlatScope(stdLib);
     scope.addFromAST(this.parse(program));
@@ -23,14 +23,14 @@ export class Interpreter {
 
     if (value instanceof Values.ErrorValue) {
       process.stdout.write("No main function defined\n");
-      return;
+      return 1;
     }
     const main = value as Values.Function;
     const type = main.type as Types.Function;
 
     if (type.params.length > 0) {
       process.stdout.write("Main function arguments are not supported\n");
-      return;
+      return 1;
     }
 
     let outNumber = 0;
@@ -40,6 +40,7 @@ export class Interpreter {
         printPortData(port);
       }
     }
+    return 0;
   }
   private parse(program: string): AST.Definition[] {
     return this.parser.parse(add_indents(program, "{", "}", "#", "'\"", "([", ")]"));

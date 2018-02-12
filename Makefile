@@ -7,7 +7,7 @@ compile:
 lint:
 	@./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts'
 
-test: setup compile
-	@./node_modules/buster/bin/buster-test
+test:
+	npm test
 
 .PHONY: test setup compile lint
