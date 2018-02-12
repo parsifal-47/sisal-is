@@ -1,3 +1,0 @@
-main = f(A,M,N)
-  A,
-  M+N*M

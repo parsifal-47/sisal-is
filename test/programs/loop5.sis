@@ -1,6 +1,0 @@
-foo = f(n)
-   for initial
-      i = 0
-   while (i<=n)
-      i = old i + 1
-   returns value of i

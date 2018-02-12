@@ -1,12 +1,11 @@
-import { Interpreter } from "../src/interpreter";
+import { Program } from "../src/program";
 import { expect } from "chai";
 import 'mocha';
+import * as fs from "fs";
 
 describe("Smoke test", () => {
   it("Should not crash", () => {
-    const program = "main = f()\n  1";
-    const interpreter = new Interpreter();
-    const result = interpreter.run(program);
-    expect(result).to.equal(0);
+    const program = new Program(fs.readFileSync("test/programs/smoke.sis", "utf8"));
+    expect(program.outputs.length).to.equal(1);
   });
 });

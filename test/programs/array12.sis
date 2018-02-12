@@ -1,5 +1,0 @@
-main = f(n)
-   let
-      a = [ [n, n, n], [n, n, n], [n, n, n] ]
-   in
-      a[2]

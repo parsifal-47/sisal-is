@@ -1,5 +1,0 @@
-foo = f()
-   let
-      a = [1, 2, 3]
-   in
-      addh(a, 4)

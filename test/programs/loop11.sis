@@ -1,7 +1,0 @@
-length = f(A, N)
-   let
-      s = 0
-   in
-      for i in A
-         s = old s + i
-      returns value of s

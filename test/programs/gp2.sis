@@ -1,5 +1,0 @@
-foo = f(a)
-   for i in [1 .. 200]
-   repeat
-      a = addh(old a, 0)
-   returns array of a

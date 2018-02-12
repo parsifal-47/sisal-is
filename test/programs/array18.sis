@@ -1,5 +1,0 @@
-main = f(a)
-  let
-   b = remh(a)
-  in
-   b
