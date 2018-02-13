@@ -112,7 +112,8 @@ DecimalLiteral
       if (after !== null || exponent !== null) {
         return {
           type: "FloatLiteral",
-          value: parseFloat(before + "." + (after!== null ? after : "")  + exponent)
+          value: parseFloat(before + "." + (after !== null ? after[1] : "") +
+                            (exponent !== null ? exponent : ""))
         };
       }
       return {
@@ -140,7 +141,9 @@ DecimalLiteral
     }
 
 DecimalIntegerLiteral
-  = "0" / digit:NonZeroDigit digits:DecimalDigits? { return digit + digits; }
+  = "0" / digit:NonZeroDigit digits:DecimalDigits? {
+    return digit + (digits === null ? "" : digits);
+  }
 
 DecimalDigits
   = digits:DecimalDigit+ { return digits.join(""); }
