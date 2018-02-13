@@ -19,15 +19,16 @@ export class BinaryExpression extends Node {
     this.nodes.push(nodeFromExpression(definition.right, scope));
     this.addInPorts(this.nodes);
 
-    this.outPorts.push(new StreamPort(this.fetchData));
+    this.outPorts.push(new StreamPort((type: Types.ReadyType, offset: number) => this.fetchData(type, offset)));
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {
     const left: Values.ReadyValue = this.inPorts[0].getData(dataType, offset);
     const right: Values.ReadyValue = this.inPorts[1].getData(dataType, offset);
 
-    if (left.type !== right.type) {
-      return new Values.ErrorValue("Types should be equal for binary operation");
+    if (!Types.checkType(left.type, right.type)) {
+      return new Values.ErrorValue("Types should be equal for binary operation " +
+                        JSON.stringify(left.type) + " " + JSON.stringify(right.type));
     }
 
     return this.processPair(left, right);

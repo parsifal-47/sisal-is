@@ -19,7 +19,7 @@ export class ArrayValue extends Node {
 
     this.addInPorts(this.nodes);
 
-    this.outPorts = [new SingleValuePort(this.fetchData)];
+    this.outPorts = [new SingleValuePort((type: Types.ReadyType) => this.fetchData(type))];
   }
 
   public fetchData(type: Types.ReadyType): Values.ReadyValue {

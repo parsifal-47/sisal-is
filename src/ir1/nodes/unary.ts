@@ -19,7 +19,7 @@ export class UnaryExpression extends Node {
 
     this.addInPorts(this.nodes);
 
-    this.outPorts.push(new StreamPort(this.fetchData));
+    this.outPorts.push(new StreamPort((type: Types.ReadyType, offset: number) => this.fetchData(type, offset)));
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {

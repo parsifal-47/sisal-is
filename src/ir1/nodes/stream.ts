@@ -21,7 +21,7 @@ export class StreamValue extends Node {
     }
     this.addInPorts(this.nodes);
 
-    this.outPorts = [new StreamPort(this.fetchData)];
+    this.outPorts = [new StreamPort((type: Types.ReadyType, offset: number) => this.fetchData(type, offset))];
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {

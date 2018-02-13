@@ -11,6 +11,6 @@ const program = new Program(fs.readFileSync(process.argv[2], "utf8"));
 
 let outNumber = 0;
 for (const port of program.outputs) {
-  process.stdout.write("Output #" + (outNumber++) + "\n");
+  process.stdout.write("Output #" + (outNumber++) + ": ");
   printPortData(port);
 }
