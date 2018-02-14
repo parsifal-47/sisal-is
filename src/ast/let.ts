@@ -3,7 +3,7 @@ import { Expression } from "./expression";
 import { Node } from "./node";
 
 export interface LetExpression extends Node {
-  defintions: Definition[];
+  definitions: Definition[];
   expressions: Expression[];
 }
 

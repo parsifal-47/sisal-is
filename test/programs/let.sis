@@ -1,0 +1,6 @@
+main = f()
+  let
+    a = 3
+    b = 5
+  in
+    a + b * 4

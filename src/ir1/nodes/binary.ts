@@ -66,9 +66,6 @@ export class BinaryExpression extends Node {
     if (this.operator === "&") {
       return new Values.Boolean(left.value && right.value);
     }
-    if (this.operator === "||") {
-      return new Values.Boolean(left.value || right.value);
-    }
     return new Values.ErrorValue("Unknown operation " + this.operator);
   }
 
@@ -83,7 +80,7 @@ export class BinaryExpression extends Node {
       return new Values.Integer(left.value * right.value);
     }
     if (this.operator === "/") {
-      return new Values.Integer(left.value / right.value);
+      return new Values.Integer(Math.trunc(left.value / right.value));
     }
     if (this.operator === "%") {
       return new Values.Integer(left.value % right.value);

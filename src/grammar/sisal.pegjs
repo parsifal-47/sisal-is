@@ -381,8 +381,8 @@ Expression
   = LogicalOperation
 
 LogicalOperator
-  = "||"
-  / "|" !"|"
+  = "||" { return "|"; }
+  / "|" !"|" { return "|"; }
   / "^"
   / "&"
 
@@ -395,8 +395,8 @@ LogicalOperation
 CompareOperator
   = "="
   / "/="
-  / "<" !"="
-  / ">" !"="
+  / "<" !"=" { return "<"; }
+  / ">" !"=" { return ">"; }
   / "<="
   / ">="
 
@@ -491,7 +491,7 @@ Operand
 /* Compound expressions */
 
 LetExpression
-  = LetToken __ definitions:WrappedDefintions InToken __ expresssions:WrappedExpressions {
+  = LetToken __ definitions:WrappedDefintions InToken __ expressions:WrappedExpressions {
       return {type: "Let", definitions: definitions, expressions: expressions };
     }
 

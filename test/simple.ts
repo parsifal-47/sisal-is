@@ -12,8 +12,8 @@ describe("Smoke test", () => {
     expect(program.outputs.length).to.equal(1);
   });
   it("Should not crash 2", () => {
-    const program = new Program(fs.readFileSync(testPath + "arith1.sis", "utf8"));
-    expect(program.outputs.length).to.equal(1);
+    const program = new Program(fs.readFileSync(testPath + "arith.sis", "utf8"));
+    expect(program.outputs.length).to.equal(6);
   });
 
   const folder = fs.readdirSync(testPath);
@@ -25,7 +25,8 @@ describe("Smoke test", () => {
       const program = new Program(fs.readFileSync(testPath + fileName, "utf8"));
       let result = "";
       for (const port of program.outputs) {
-        printPortData(port, (s: string) => result += s + "\n");
+        printPortData(port, (s: string) => result += s);
+        result += "\n";
       }
       expect(result).to.equal(fs.readFileSync(testPath + fileName + ".result", "utf8"));
     });

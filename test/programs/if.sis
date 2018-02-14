@@ -1,0 +1,7 @@
+main = f()
+  if 1 > 2
+    3
+  elseif 3 > 2
+    2
+  else
+    1

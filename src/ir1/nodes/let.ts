@@ -14,7 +14,7 @@ export class LetExpression extends Node {
   constructor(definition: AST.LetExpression, scope: Scope) {
     super("Let");
     this.scope = new FlatScope(scope);
-    this.scope.addFromAST(definition.defintions);
+    this.scope.addFromAST(definition.definitions);
 
     this.nodes = [];
     for (const expression of definition.expressions) {
