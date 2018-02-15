@@ -2,6 +2,8 @@ import { Port } from "./ir1/ports/port";
 import * as Types from "./ir1/types";
 import * as Values from "./ir1/values";
 
+const maxLength = 10;
+
 function printValue(value: Values.ReadyValue, print: (s: string) => void) {
   if (value instanceof Values.Integer || value instanceof Values.Float ||
       value instanceof Values.Boolean || value instanceof Values.ErrorValue) {
@@ -20,12 +22,20 @@ function printValue(value: Values.ReadyValue, print: (s: string) => void) {
     trimmedPrint(value.values, print);
     return;
   }
+  if (value instanceof Values.Record) {
+    const values: Values.ReadyValue[] = [];
+    value.values.forEach((v: Values.ReadyValue, key: string) => {
+      values.push(v);
+    });
+    trimmedPrint(values, print);
+    return;
+  }
 }
 
 function trimmedPrint(values: Values.ReadyValue[], print: (s: string) => void) {
   let count = 0;
-  print("[");
-  for (let value of values) {
+  print("{");
+  for (const value of values) {
     if (count > 0) {
       print(", ");
     }
@@ -33,12 +43,12 @@ function trimmedPrint(values: Values.ReadyValue[], print: (s: string) => void) {
     printValue(value, print);
     count++;
 
-    if (count >= 10) {
+    if (count >= maxLength) {
       print(", ...");
       break;
     }
   }
-  print("]");
+  print("}");
 }
 
 export function printPortData(input: Port, print: (s: string) => void) {
@@ -46,9 +56,9 @@ export function printPortData(input: Port, print: (s: string) => void) {
   print(value.type.toString() + " = ");
 
   if (value instanceof Values.StreamElement || value instanceof Values.StreamEnd) {
-    let values = [value];
+    const values = [value];
     let count = 0;
-    while (!(values[values.length - 1] instanceof Values.StreamEnd) && values.length <= 10) {
+    while (!(values[values.length - 1] instanceof Values.StreamEnd) && values.length <= maxLength) {
       values.push(input.getData(new Types.Some(), ++count));
     }
     trimmedPrint(values, print);

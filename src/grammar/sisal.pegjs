@@ -288,8 +288,8 @@ __
 /* Composite Type Values */
 
 CompositeValue
-  = ArrayValue
-  / RecordValue
+  = RecordValue
+  / ArrayValue
   / StreamValue
   / FunctionValue
   / TypeValue

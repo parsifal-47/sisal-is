@@ -1,0 +1,7 @@
+main = f()
+  [
+  west = 1
+  east = 2
+  south = 3
+  north = 4
+  ]

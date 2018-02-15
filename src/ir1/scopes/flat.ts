@@ -41,7 +41,8 @@ export class FlatScope implements Scope {
   public addFromAST(definitions: AST.Definition[]): void {
     for (const d of definitions) {
       if (d.left.length !== d.right.length && d.right.length !== 1) {
-        throw new Error("Definition arity doesn't match");
+        throw new Error("Definition arity doesn't match: " +
+                        String(d.left.length) + ":" + String(d.right.length));
       }
       const expressions = d.right.map((e) => nodeFromExpression(e, this));
       for (let i = 0; i < d.left.length; i++) {
