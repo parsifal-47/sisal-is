@@ -23,8 +23,12 @@ export class BinaryExpression extends Node {
   }
 
   private fetchData(dataType: Types.ReadyType, offset: number): Values.ReadyValue {
-    const left: Values.ReadyValue = this.inPorts[0].getData(dataType, offset);
-    const right: Values.ReadyValue = this.inPorts[1].getData(dataType, offset);
+    let type = dataType;
+    if (["+", "-", "*", "/", "%"].indexOf(this.operator) === -1) {
+      type = new Types.Some();
+    }
+    const left: Values.ReadyValue = this.inPorts[0].getData(type, offset);
+    const right: Values.ReadyValue = this.inPorts[1].getData(type, offset);
 
     if (!Types.checkType(left.type, right.type)) {
       return new Values.ErrorValue("Types should be equal for binary operation " +

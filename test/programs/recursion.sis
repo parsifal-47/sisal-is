@@ -1,0 +1,8 @@
+factorial = f(n)
+  if n < 3
+    n
+  else
+    n * factorial(n - 1)
+
+main = f()
+  factorial(2), factorial(8)
