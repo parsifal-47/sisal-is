@@ -8,10 +8,10 @@ export function checkType(checked: ReadyType, requested: ReadyType): boolean {
     return true;
   }
   if ((requested instanceof Stream) && (checked instanceof Stream)) {
-    return checkType(requested.element, checked.element);
+    return checkType(checked.element, requested.element);
   }
   if ((requested instanceof Array) && (checked instanceof Array)) {
-    return checkType(requested.element, checked.element);
+    return checkType(checked.element, requested.element);
   }
   return requested.name === checked.name;
 }
