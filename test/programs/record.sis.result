@@ -1,1 +1,3 @@
 Record[west: Integer, east: Integer, south: Integer, north: Integer] = {1, 2, 3, 4}
+Integer = 1
+Integer = 3
