@@ -11,17 +11,14 @@ import { SomeType } from "./types/some";
 export class FunctionValue extends Node {
   private params: Map<string, Node>;
   private returns: Node[];
-  private nodes: Node[];
+  private body: AST.Expression[];
   private scope: Scope;
 
   constructor(definition: AST.FunctionValue, scope: Scope) {
     super("Lambda");
     this.scope = new FlatScope(scope);
 
-    this.nodes = [];
-    for (const expression of definition.body) {
-      this.nodes.push(nodeFromExpression(expression, this.scope));
-    }
+    this.body = definition.body;
 
     this.params = new Map();
     for (const field of definition.params) {
@@ -42,7 +39,7 @@ export class FunctionValue extends Node {
       }
       this.returns.push(node);
     }
-    while (this.returns.length < this.nodes.length) {
+    while (this.returns.length < this.body.length) {
       this.returns.push(new SomeType());
     }
     this.outPorts.push(new SingleValuePort((type: Types.ReadyType) => this.fetchData(type)));
@@ -50,7 +47,10 @@ export class FunctionValue extends Node {
 
   public fetchData(type: Types.ReadyType): Values.ReadyValue {
     const params: Types.ReadyType[] = [];
+    const names: string[] = [];
+
     this.params.forEach((value: Node, key: string) => {
+      names.push(key);
       params.push((value.outPorts[0].getData(new Types.Type()) as Values.Type).value);
     });
 
@@ -65,6 +65,6 @@ export class FunctionValue extends Node {
       return new Values.ErrorValue("Incompartible type, not type");
     }
 
-    return new Values.Function(readyType, this.nodes, this.scope);
+    return new Values.Function(readyType, names, this.body, this.scope);
   }
 }

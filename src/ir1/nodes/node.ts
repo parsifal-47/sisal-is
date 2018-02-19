@@ -13,9 +13,13 @@ export class Node {
     this.inPorts = [];
   }
 
+  public requestPorts(portNum: number): number {
+    return this.outPorts.length;
+  }
+
   public addInPorts(nodes: Node[]): void {
     for (const node of nodes) {
-      if (node.outPorts.length !== 1) {
+      if (node.requestPorts(1) !== 1) {
         throw new Error("Each part should produce exactly one output");
       }
       this.inPorts.push(node.outPorts[0]);

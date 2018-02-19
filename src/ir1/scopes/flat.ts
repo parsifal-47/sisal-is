@@ -45,6 +45,9 @@ export class FlatScope implements Scope {
                         String(d.left.length) + ":" + String(d.right.length));
       }
       const expressions = d.right.map((e) => nodeFromExpression(e, this));
+      if (expressions.length === 1) {
+        expressions[0].requestPorts(d.left.length);
+      }
       for (let i = 0; i < d.left.length; i++) {
         let currentDefinitions: Port[] = [];
         if (this.definitions.has(d.left[i])) {

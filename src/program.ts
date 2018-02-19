@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { add_indents } from "indent-adder";
 import * as PEG from "pegjs";
 import * as AST from "./ast";
+import { nodeFromExpression } from "./ir1/create";
 import { Port } from "./ir1/ports/port";
 import { FlatScope } from "./ir1/scopes/flat";
 import { Scope } from "./ir1/scopes/scope";
@@ -35,7 +36,10 @@ export class Program {
     }
 
     this.outputs = [];
-    for (const node of main.nodes) {
+
+    for (const functionPart of main.body) {
+      const node = nodeFromExpression(functionPart, scope);
+      node.requestPorts(1);
       for (const port of node.outPorts) {
         this.outputs.push(port);
       }

@@ -5,8 +5,23 @@ import * as TypeNodes from "./nodes/types";
 import { Scope } from "./scopes/scope";
 
 function nodeFromPostfix(postfix: AST.Postfix, scope: Scope): Nodes.Node {
-  // TODO: add operationList
-  return nodeFromExpression(postfix.base, scope);
+  let node = nodeFromExpression(postfix.base, scope);
+  for (const operation of postfix.operationList) {
+    if (AST.isFunctionCall(operation)) {
+      node = new Nodes.FunctionCall(node, operation, scope);
+      continue;
+    }
+    if (AST.isRecordAccess(operation)) {
+      node = new Nodes.RecordAccess(node, operation, scope);
+      continue;
+    }
+    if (AST.isArrayAccess(operation)) {
+      node = new Nodes.ArrayAccess(node, operation, scope);
+      continue;
+    }
+    throw new Error("Unexpected postfix operation " + JSON.stringify(operation));
+  }
+  return node;
 }
 
 function nodeFromTypeValue(node: ASTTypes.TypeValue, scope: Scope): Nodes.Node {

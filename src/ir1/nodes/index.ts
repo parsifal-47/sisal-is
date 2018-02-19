@@ -1,6 +1,8 @@
 export * from "./array";
+export * from "./arrayAccess";
 export * from "./binary";
 export * from "./function";
+export * from "./functionCall";
 export * from "./identifier";
 export * from "./if";
 export * from "./ifBranch";
@@ -11,5 +13,6 @@ export * from "./node";
 export * from "./old";
 export * from "./ready";
 export * from "./record";
+export * from "./recordAccess";
 export * from "./stream";
 export * from "./unary";
