@@ -69,6 +69,6 @@ export class FunctionCall extends Node {
   }
 
   private fetchReadyData(portNum: number, type: Types.ReadyType, offset: number): Values.ReadyValue {
-    return this.nodes[portNum].outPorts[0].getData(type, offset);
+    return this.functionBody[portNum].outPorts[0].getData(type, offset);
   }
 }

@@ -19,7 +19,7 @@ export class RecordType extends Node {
     this.names = [];
 
     for (const field of defintion.fields) {
-      this.names.push(field.id);
+      this.names.push(field.name);
       if (field.dataType) {
         this.nodes.push(nodeFromExpression(field.dataType, scope));
       } else {

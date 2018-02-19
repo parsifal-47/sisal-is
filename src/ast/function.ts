@@ -13,7 +13,7 @@ export function isFunctionValue(node: Node): node is FunctionValue {
 }
 
 export interface IdWithOptionalType extends Node {
-  id: string;
+  name: string;
   dataType?: Expression;
 }
 

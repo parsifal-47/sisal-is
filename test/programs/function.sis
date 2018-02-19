@@ -1,3 +1,5 @@
+fff = f(a)
+        a * 2
+
 main = f()
-  f(a)
-    a * 2
+  fff, fff(3)

@@ -28,7 +28,7 @@ export class FunctionValue extends Node {
         throw new Error("Each type of the signature should produce exactly one output");
       }
 
-      this.params.set(field.id, type);
+      this.params.set(field.name, type);
     }
 
     this.returns = [];
