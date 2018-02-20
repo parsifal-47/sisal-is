@@ -37,8 +37,8 @@ export class Program {
 
     this.outputs = [];
 
-    for (const functionPart of main.body) {
-      const node = nodeFromExpression(functionPart, scope);
+    const nodes = main.bodyFactory(scope);
+    for (const node of nodes) {
       node.requestPorts(1);
       for (const port of node.outPorts) {
         this.outputs.push(port);

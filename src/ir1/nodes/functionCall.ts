@@ -57,9 +57,7 @@ export class FunctionCall extends Node {
     const functionValue = value as Values.Function;
     this.callScope = new FlatScope(functionValue.scope);
 
-    for (const expression of functionValue.body) {
-      this.functionBody.push(nodeFromExpression(expression, this.callScope));
-    }
+    this.functionBody = functionValue.bodyFactory(this.callScope);
 
     for (let i = 0; i < functionValue.argumentNames.length; i++) {
       this.callScope.inject(functionValue.argumentNames[i], this.inPorts[i + 1]);

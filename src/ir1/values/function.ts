@@ -4,16 +4,18 @@ import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import { ReadyValue } from "./ready";
 
+export type BodyFactory = (scope: Scope) => Node[];
+
 export class Function extends ReadyValue {
-  public body: Expression[];
+  public bodyFactory: BodyFactory;
   public scope: Scope;
   public argumentNames: string[];
 
   public constructor(type: Types.Function, argumentNames: string[],
-                     body: Expression[], scope: Scope) {
+                     bodyFactory: BodyFactory, scope: Scope) {
     super(type);
     this.argumentNames = argumentNames;
-    this.body = body;
+    this.bodyFactory = bodyFactory;
     this.scope = scope;
   }
 }

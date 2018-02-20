@@ -11,14 +11,20 @@ import { SomeType } from "./types/some";
 export class FunctionValue extends Node {
   private params: Map<string, Node>;
   private returns: Node[];
-  private body: AST.Expression[];
+  private bodyFactory: Values.BodyFactory;
   private scope: Scope;
 
   constructor(definition: AST.FunctionValue, scope: Scope) {
     super("Lambda");
     this.scope = new FlatScope(scope);
 
-    this.body = definition.body;
+    this.bodyFactory = (scope: Scope) => {
+      const nodes: Node[] = [];
+      for (const expression of definition.body) {
+        nodes.push(nodeFromExpression(expression, scope));
+      }
+      return nodes;
+    };
 
     this.params = new Map();
     for (const field of definition.params) {
@@ -39,7 +45,7 @@ export class FunctionValue extends Node {
       }
       this.returns.push(node);
     }
-    while (this.returns.length < this.body.length) {
+    while (this.returns.length < definition.body.length) {
       this.returns.push(new SomeType());
     }
     this.outPorts.push(new SingleValuePort((type: Types.ReadyType) => this.fetchData(type)));
@@ -65,6 +71,6 @@ export class FunctionValue extends Node {
       return new Values.ErrorValue("Incompartible type, not type");
     }
 
-    return new Values.Function(readyType, names, this.body, this.scope);
+    return new Values.Function(readyType, names, this.bodyFactory, this.scope);
   }
 }

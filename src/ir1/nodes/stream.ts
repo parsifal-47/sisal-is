@@ -34,7 +34,7 @@ export class StreamValue extends Node {
         this.rightBound = this.inPorts[1].getData(new Types.Integer()) as Values.Integer;
       }
     }
-    if (this.rightBound && (this.leftBound.value + offset >= this.rightBound.value)) {
+    if (this.rightBound && (this.leftBound.value + offset > this.rightBound.value)) {
       return new Values.StreamEnd();
     }
     return new Values.StreamElement(new Values.Integer(this.leftBound.value + offset));
