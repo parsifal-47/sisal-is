@@ -28,7 +28,7 @@ export class FunctionValue extends Node {
 
     this.params = new Map();
     for (const field of definition.params) {
-      const type: Node = field.dataType ? nodeFromExpression(field.dataType, scope)
+      const type: Node = field.dataType ? nodeFromExpression(field.dataType, s)
                                       : new SomeType();
       if (type.outPorts.length !== 1) {
         throw new Error("Each type of the signature should produce exactly one output");
