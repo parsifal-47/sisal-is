@@ -561,10 +561,10 @@ LoopExpression
     return {
       type: "Loop",
       range: range,
-      init: init,
+      init: init ? init : [],
       preCondition: preCondition,
       postCondition: postCondition,
-      body: body,
+      body: body ? body : [],
       returns: returns
     };
   }

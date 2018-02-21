@@ -23,6 +23,7 @@ export class LoopExpression extends Node {
     }
 
     for (const node of this.nodes) {
+      node.requestPorts(1);
       for (const port of node.outPorts) {
         this.outPorts.push(port);
       }
