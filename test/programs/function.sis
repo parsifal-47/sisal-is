@@ -2,4 +2,4 @@ fff = f(a)
         a * 2
 
 main = f()
-  fff, fff(3)
+  fff, fff(3), fff of 5
