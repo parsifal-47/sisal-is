@@ -14,9 +14,9 @@ export class FunctionValue extends Node {
   private bodyFactory: Values.BodyFactory;
   private scope: Scope;
 
-  constructor(definition: AST.FunctionValue, scope: Scope) {
+  constructor(definition: AST.FunctionValue, s: Scope) {
     super("Lambda");
-    this.scope = new FlatScope(scope);
+    this.scope = new FlatScope(s);
 
     this.bodyFactory = (scope: Scope) => {
       const nodes: Node[] = [];

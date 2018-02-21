@@ -1,7 +1,7 @@
 import * as fs from "fs";
+import { Parser } from "./parser";
 import { printPortData } from "./print";
 import { Program } from "./program";
-import { Parser } from "./parser";
 import { buildStdLib } from "./stdlib";
 
 if (process.argv.length < 3) {

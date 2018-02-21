@@ -1,9 +1,9 @@
-import { Port } from "../ir1/ports/port";
 import { Node } from "../ir1/nodes/node";
+import { Port } from "../ir1/ports/port";
+import { SingleValuePort } from "../ir1/ports/single";
 import { Scope } from "../ir1/scopes/scope";
 import * as Types from "../ir1/types";
 import * as Values from "../ir1/values";
-import { SingleValuePort } from "../ir1/ports/single";
 
 export class FunctionWrap extends Node {
   private scope: Scope;

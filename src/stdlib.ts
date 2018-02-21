@@ -1,10 +1,11 @@
 import * as fs from "fs";
 import { FlatScope } from "./ir1/scopes/flat";
 import { Scope } from "./ir1/scopes/scope";
-import { Parser } from "./parser";
-import { FunctionWrap } from "./stdlib/wrapper";
-import { lastValueFactory } from "./stdlib/last";
 import * as Types from "./ir1/types";
+import { Parser } from "./parser";
+import { firstValueFactory } from "./stdlib/first";
+import { lastValueFactory } from "./stdlib/last";
+import { FunctionWrap } from "./stdlib/wrapper";
 
 export function buildStdLib(parser: Parser): Scope {
   const scope = new FlatScope(undefined);
@@ -15,5 +16,11 @@ export function buildStdLib(parser: Parser): Scope {
              new Types.Function([new Types.Stream(new Types.Some())], [new Types.Some()]),
              lastValueFactory("stream"));
   scope.inject("last", lastValue.outPorts[0]);
+
+  const firstValue = new FunctionWrap(scope, "first", ["stream"],
+             new Types.Function([new Types.Stream(new Types.Some())], [new Types.Some()]),
+             firstValueFactory("stream"));
+  scope.inject("first", firstValue.outPorts[0]);
+
   return scope;
 }
