@@ -1,27 +1,19 @@
 import * as fs from "fs";
-import { add_indents } from "indent-adder";
-import * as PEG from "pegjs";
 import * as AST from "./ast";
 import { nodeFromExpression } from "./ir1/create";
+import { Parser } from "./parser";
 import { Port } from "./ir1/ports/port";
 import { FlatScope } from "./ir1/scopes/flat";
 import { Scope } from "./ir1/scopes/scope";
 import * as Types from "./ir1/types";
 import * as Values from "./ir1/values";
-import { StdLibBuilder } from "./stdlib";
 
 export class Program {
   public outputs: Port[];
-  private parser: PEG.Parser;
-  private stdLib: Scope;
 
-  public constructor(text: string) {
-    const grammar = fs.readFileSync("src/grammar/sisal.pegjs", "utf8");
-    this.parser = PEG.generate(grammar, { trackLineAndColumn: true } as PEG.ParserBuildOptions);
-    this.stdLib = StdLibBuilder.build();
-
-    const scope = new FlatScope(this.stdLib);
-    scope.addFromAST(this.parse(text));
+  public constructor(text: string, parser: Parser, stdLib: Scope) {
+    const scope = new FlatScope(stdLib);
+    scope.addFromAST(parser.parse(text));
 
     const value = scope.resolve("main", new Types.Some(), 0);
 
@@ -44,9 +36,5 @@ export class Program {
         this.outputs.push(port);
       }
     }
-  }
-
-  private parse(program: string): AST.Definition[] {
-    return this.parser.parse(add_indents(program, "{", "}", "#", "'\"", "([", ")]"));
   }
 }

@@ -38,13 +38,9 @@ A set of examples is available [here](examples/).
 - arithmetics + - * /
 
 
-### Standard library
+### Standard reductions
 
-- sin
-- cos
-- sqrt
-- pow
-- sum, product, array, stream, value, max, min (reductions)
+- sum, product, array, stream, last, max, min
 
 ### Deployment
 
