@@ -1,0 +1,37 @@
+max = f(a)
+  for b in a
+  initial
+    m = first of a
+  repeat
+    m = if old m > b
+          old m
+    else
+          b
+  returns last of m
+
+min = f(a)
+  for b in a
+  initial
+    m = first of a
+  repeat
+    m = if old m < b
+          old m
+    else
+          b
+  returns last of m
+
+sum = f(a)
+  for b in a
+  initial
+    m = 0
+  repeat
+    m = old m + b
+  returns last of m
+
+product = f(a)
+  for b in a
+  initial
+    m = 1
+  repeat
+    m = old m * b
+  returns last of m
