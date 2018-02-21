@@ -25,7 +25,8 @@ The main difference between ordinary Sisal and this version that is does not req
 
 Please read [language overview](overview.md) if you want to know more.
 
-A set of examples is available [here](examples/).
+A set of test programs with results is available [here](test/programs/).
+More complex examples are [here](examples/).
 
 ### Supported constraints
 
@@ -35,7 +36,7 @@ A set of examples is available [here](examples/).
 - for in
 - for while
 - for repeat
-- arithmetics + - * /
+- arithmetics + - * / %
 
 
 ### Standard reductions
