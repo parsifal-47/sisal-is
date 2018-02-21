@@ -555,7 +555,7 @@ LoopExpression
     init:LoopInit?
     preCondition:LoopCondition?
     (RepeatToken __)?
-    body:WrappedExpressions?
+    body:WrappedDefintions?
     postCondition:LoopCondition? __
     ReturnsToken __ returns:ExpressionList __ {
     return {

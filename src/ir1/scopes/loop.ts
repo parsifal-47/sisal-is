@@ -89,13 +89,15 @@ export class LoopScope implements Scope {
         }
       }
 
-      let prevScope = this.initScope;
       if (offset >= this.maxOffset) {
         return new Values.StreamEnd();
       }
 
       for (let i = 0; i <= offset; i++) {
         if (!this.iterationScopes[i]) {
+          const prevScope = this.iterationScopes[i - 1] ?
+                            this.iterationScopes[i - 1] : this.initScope;
+
           if (this.preCondition && !this.checkCondition(this.preCondition, prevScope)) {
             break;
           }
@@ -111,8 +113,7 @@ export class LoopScope implements Scope {
             iterationOffset /= this.rangeNodes[j].length;
           }
 
-          prevScope = this.iterationScopes[i];
-          if (this.postCondition && !this.checkCondition(this.postCondition, prevScope)) {
+          if (this.postCondition && !this.checkCondition(this.postCondition, this.iterationScopes[i])) {
             break;
           }
         }
