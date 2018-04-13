@@ -1,7 +1,7 @@
-Sisal with Ident-Syntax [![Build Status](https://travis-ci.org/parsifal-47/sisal-is.svg?branch=master)](https://travis-ci.org/parsifal-47/sisal-is)
+Modernized Sisal Interpreter (MSInt) [![Build Status](https://travis-ci.org/parsifal-47/sisal-is.svg?branch=master)](https://travis-ci.org/parsifal-47/sisal-is)
 ========
 
-Modernized dialect of Sisal with type inference!
+Sisal with type inference and indent structuring!
 
 Current status: `early alpha` (some programs work but test coverage is very low)
 
