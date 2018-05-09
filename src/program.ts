@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import * as AST from "./ast";
+import * as GML from "./graphml/";
 import { nodeFromExpression } from "./ir1/create";
+import { Node, subGraphML } from "./ir1/nodes/node";
 import { Port } from "./ir1/ports/port";
 import { FlatScope } from "./ir1/scopes/flat";
 import { Scope } from "./ir1/scopes/scope";
@@ -10,6 +12,7 @@ import { Parser } from "./parser";
 
 export class Program {
   public outputs: Port[];
+  public endNodes: Node[];
 
   public constructor(text: string, parser: Parser, stdLib: Scope) {
     const scope = new FlatScope(stdLib);
@@ -29,12 +32,16 @@ export class Program {
 
     this.outputs = [];
 
-    const nodes = main.bodyFactory(scope);
-    for (const node of nodes) {
+    this.endNodes = main.bodyFactory(scope);
+    for (const node of this.endNodes) {
       node.requestPorts(1);
       for (const port of node.outPorts) {
         this.outputs.push(port);
       }
     }
+  }
+
+  public graphML(): string {
+    return GML.makeDocument(subGraphML(this.endNodes));
   }
 }

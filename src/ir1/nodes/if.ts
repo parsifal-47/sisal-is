@@ -5,7 +5,7 @@ import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import * as Values from "../values";
 import { IfBranch } from "./ifBranch";
-import { Node } from "./node";
+import { Node, subGraphML } from "./node";
 
 export class IfExpression extends Node {
   private branches: IfBranch[];
@@ -25,6 +25,10 @@ export class IfExpression extends Node {
       this.outPorts.push(new StreamPort(
         (type: Types.ReadyType, offset: number) => this.fetchPort(i, type, offset)));
     }
+  }
+
+  public graphML(): string {
+    return subGraphML(this.branches);
   }
 
   private fetchPort(portNum: number, dataType: Types.ReadyType, offset: number): Values.ReadyValue {

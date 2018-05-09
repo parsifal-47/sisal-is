@@ -78,5 +78,5 @@ export function subGraphML(nodes: Node[]): string {
   }
 
   return Array.from(component.values(), (c) => c.graphML()).join("") +
-         edges.map((e) => GML.makeEdge(e[0], e[1], e[2], e[3]));
+         edges.map((e) => GML.makeEdge(e[0], e[1], e[2], e[3])).join("");
 }

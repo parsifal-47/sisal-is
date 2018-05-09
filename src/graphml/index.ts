@@ -15,9 +15,8 @@ export function makeNode(id: string, name: string, inPorts: number,
 export function makeEdge(idFrom: string, portFrom: number,
                          idTo: string, portTo: number,
                          inner: boolean = false): string {
-  return `<edge source="${idFrom}" target="${idTo}"
-sourceport="out${portFrom}"
-targetport="` + (inner ? "out" : "in") + portTo + `"/>`;
+  return `<edge source="${idFrom}" target="${idTo}" sourceport="out${portFrom}" ` +
+         `targetport="` + (inner ? "out" : "in") + portTo + `"/>`;
 }
 
 export function makeDocument(contents: string): string {
