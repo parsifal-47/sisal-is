@@ -1,9 +1,6 @@
 setup:
 	npm install
 
-setup-dev:
-	npm install --only=dev
-
 compile:
 	tsc
 
