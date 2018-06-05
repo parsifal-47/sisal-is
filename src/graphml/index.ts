@@ -2,7 +2,7 @@ export function makeNode(id: string, name: string, inPorts: number,
                          outPorts: number, subGraph: string = ""): string {
   const genFunction = (prefix: string, quantity: number) => {
     return (Array.from(new Array(quantity),
-       (val, index) => "<port name=\"" + prefix + String(index) + "\">").join(""));
+       (val, index) => "<port name=\"" + prefix + String(index) + "\" />").join(""));
   };
 
   return `<node id="${id}"><data key="type">${name}</data>` +
