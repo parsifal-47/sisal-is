@@ -46,7 +46,7 @@
   "dependencies": {
     "@types/node": "^9.4.0",
     "@types/pegjs": "^0.10.0",
-    "indent-adder": "0.1.x",
+    "indent-adder": "git://github.com/parsifal-47/indent-adder.git",
     "pegjs": "^0.10.0"
   },
   "devDependencies": {
