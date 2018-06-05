@@ -1,6 +1,9 @@
 setup:
 	npm install
 
+setup-dev:
+	npm install --only=dev
+
 compile:
 	tsc
 
@@ -10,4 +13,4 @@ lint:
 test:
 	npm test
 
-.PHONY: test setup compile lint
+.PHONY: test setup setup-dev compile lint

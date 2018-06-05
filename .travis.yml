@@ -6,6 +6,6 @@ env:
 
 script:
  - case "$TASK" in
-     selfcheck) make setup compile test;;
+     selfcheck) make setup setup-dev test;;
      *) make -C $TASK check;;
    esac
