@@ -42,6 +42,6 @@ export class Program {
   }
 
   public graphML(): string {
-    return GML.makeDocument(subGraphML(this.endNodes));
+    return GML.makeDocument(GML.makeGraph("program", subGraphML(this.endNodes)));
   }
 }
