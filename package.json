@@ -47,7 +47,8 @@
     "@types/node": "^9.4.0",
     "@types/pegjs": "^0.10.0",
     "indent-adder": "git://github.com/parsifal-47/indent-adder.git",
-    "pegjs": "^0.10.0"
+    "pegjs": "^0.10.0",
+    "pretty-data": "git://github.com/parsifal-47/pretty-data.git"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",

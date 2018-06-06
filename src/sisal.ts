@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { pd } from "pretty-data";
 import { Parser } from "./parser";
 import { printPortData } from "./print";
 import { Program } from "./program";
@@ -22,7 +23,7 @@ const stdLib = buildStdLib(parser);
 const program = new Program(fs.readFileSync(args[2], "utf8"), parser, stdLib);
 
 if (graph) {
-  process.stdout.write(program.graphML());
+  process.stdout.write(pd.xml(program.graphML()));
 } else {
   let outNumber = 0;
   for (const port of program.outputs) {
