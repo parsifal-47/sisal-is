@@ -3,3 +3,6 @@ fib = f(m)
     m
   else
     fib(m - 1) + fib(m - 2)
+
+main = f()
+  fib(2), fib(18)
