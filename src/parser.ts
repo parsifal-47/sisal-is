@@ -7,7 +7,7 @@ export class Parser {
   private parser: PEG.Parser;
   public constructor() {
     const grammar = fs.readFileSync("src/grammar/sisal.pegjs", "utf8");
-    this.parser = PEG.generate(grammar, { trackLineAndColumn: true } as PEG.ParserBuildOptions);
+    this.parser = PEG.generate(grammar);
   }
   public parse(program: string): AST.Definition[] {
     return this.parser.parse(add_indents(program, "{", "}", "#", "'\"", "([", ")]"));

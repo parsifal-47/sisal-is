@@ -10,6 +10,7 @@
     for (var i = 0; i < tail.length; i++) {
       result = {
         type:     "Binary",
+        location: location(),
         operator: tail[i][1],
         left:     result,
         right:    tail[i][3]
@@ -92,13 +93,14 @@ Literal
   / value:StringLiteral {
       return {
         type:  "StringLiteral",
+        location: location(),
         value: value
       };
     }
 
 BooleanLiteral
-  = TrueToken  { return { type: "BooleanLiteral", value: true  }; }
-  / FalseToken { return { type: "BooleanLiteral", value: false }; }
+  = TrueToken  { return { type: "BooleanLiteral", location: location(), value: true  }; }
+  / FalseToken { return { type: "BooleanLiteral", location: location(), value: false }; }
 
 NumericLiteral "number"
   = literal:(HexIntegerLiteral / DecimalLiteral) !IdentifierStart {
@@ -112,18 +114,21 @@ DecimalLiteral
       if (after !== null || exponent !== null) {
         return {
           type: "FloatLiteral",
+          location: location(),
           value: parseFloat(before + "." + (after !== null ? after[1] : "") +
                             (exponent !== null ? exponent : ""))
         };
       }
       return {
         type: "IntegerLiteral",
+        location: location(),
         value: parseInt(before)
       };
     }
   / "." after:DecimalDigits exponent:ExponentPart? {
       return {
         type: "FloatLiteral",
+        location: location(),
         value: parseFloat("." + after + exponent)
       };
     }
@@ -131,11 +136,13 @@ DecimalLiteral
       if (exponent !== null) {
         return {
           type: "FloatLiteral",
+          location: location(),
           value: parseFloat(before + exponent)
         };
       }
       return {
         type: "IntegerLiteral",
+        location: location(),
         value: parseInt(before)
       };
     }
@@ -296,17 +303,17 @@ CompositeValue
 
 ArrayValue
   = "[" __ contents:ExpressionList __ "]" {
-    return {type: "Array", contents: contents};
+  return {type: "Array", location: location(), contents: contents};
   }
 
 RecordValue
   = "[" __ contents:DefinitionList __ "]" {
-    return {type: "Record", contents: contents};
+    return {type: "Record", location: location(), contents: contents};
   }
 
 StreamValue
   = "[" __ lowerBound:Expression __ ".." __ upperBound:Expression? __ "]"  {
-    return {type: "Stream", lowerBound: lowerBound, upperBound: upperBound };
+    return {type: "Stream", location: location(), lowerBound: lowerBound, upperBound: upperBound };
   }
 
 FunctionValue
@@ -315,6 +322,7 @@ FunctionValue
           returns:FunctionReturns? ")" __ body:FunctionBody {
     return {
       type: "Lambda",
+      location: location(),
       params: params ? params : [],
       returns: returns ? returns : [],
       body: body
@@ -340,28 +348,28 @@ TypeValue
 
 PrimitiveType
   = name:(IntegerToken / BooleanToken / FloatToken / StringToken) {
-    return {type: "Type", name: name };
+    return {type: "Type", location: location(), name: name };
   }
 
 StreamType
   = StreamToken __ "[" __ type:Expression __ "]" {
-    return {type: "Type", name: "Stream", elementType: type };
+    return {type: "Type", location: location(), name: "Stream", elementType: type };
   }
 
 ArrayType
   = ArrayToken __ "[" __ type:Expression __ "]" {
-    return {type: "Type", name: "Array", elementType: type };
+    return {type: "Type", location: location(), name: "Array", elementType: type };
   }
 
 RecordType
   = RecordToken __ "[" __ fields:IdsWithOptionalTypes __ "]" {
-    return {type: "Type", name: "Record", fields: fields };
+    return {type: "Type", location: location(), name: "Record", fields: fields };
   }
 
 FunctionType
   = FunctionTypeToken __
     "[" __ params: ExpressionList __ returns:FunctionReturns? "]" {
-    return {type: "Type", name: "Function", params: params, returns: returns };
+    return {type: "Type", location: location(), name: "Function", params: params, returns: returns };
   }
 
 IdsWithOptionalTypes
@@ -372,7 +380,7 @@ IdsWithOptionalTypes
 
 IdWithOptionalType
   = id:Identifier __ type:(":" __ Expression __)? {
-    return {type: "WeaklyTypedIdentifier", name: id, dataType: (type ? type[2]: null) };
+    return {type: "WeaklyTypedIdentifier", location: location(), name: id, dataType: (type ? type[2]: null) };
   }
 
 /* Expressions */
@@ -434,7 +442,7 @@ UnaryOperator
 
 UnaryOperation
   = operation:UnaryOperator __ operand:UnaryOperation {
-    return {type: "Unary", operator: operation, right: operand};
+    return {type: "Unary", location: location(), operator: operation, right: operand};
   }
   / PostfixOperation
 
@@ -442,22 +450,23 @@ PostfixOperation
   = base:Operand
     args:(
      __ "(" __ expressions:ExpressionList? __ ")" {
-       return {type: "FunctionCall", arguments: expressions };
+       return {type: "FunctionCall", location: location(), arguments: expressions };
      }
      / __ "." __ name:Identifier {
-       return {type: "RecordAccess", field: name };
+       return {type: "RecordAccess", location: location(), field: name };
      }
      / __ "[" __ expression:Expression __ "]" {
-       return {type: "ArrayAccess", index: expression};
+       return {type: "ArrayAccess", location: location(), index: expression};
      }
      / __ "of" __ expression:Expression {
-       return {type: "FunctionCall", arguments: [expression]};
+       return {type: "FunctionCall", location: location(), arguments: [expression]};
      }
     )* {
       if (args.length==0) return base;
 
       var result = {
           type: "Postfix",
+          location: location(),
           base: base,
           operationList: []
         };
@@ -483,7 +492,7 @@ Operand
   = LetExpression
   / LoopExpression
   / IfExpression
-  / OldToken __ name:Identifier {return {type: "Old", id: name}}
+  / OldToken __ name:Identifier {return {type: "Old", location: location(), id: name}}
   / CompositeValue
   / Identifier
   / Literal
@@ -492,7 +501,7 @@ Operand
 
 LetExpression
   = LetToken __ definitions:WrappedDefintions InToken __ expressions:WrappedExpressions {
-      return {type: "Let", definitions: definitions, expressions: expressions };
+      return {type: "Let", location: location(), definitions: definitions, expressions: expressions };
     }
 
 WrappedDefintions
@@ -513,7 +522,7 @@ DefinitionList
 
 Definition
   = left:LValue __ "=" __ right:ExpressionList {
-    return {type: "Definition", left: left, right: right};
+    return {type: "Definition", location: location(), left: left, right: right};
   }
 
 LValue
@@ -527,6 +536,7 @@ IfExpression
     elseIfs:(ElseIfs)? __ ElseToken __ elseBranch:WrappedExpressions {
     return {
       type: "If",
+      location: location(),
       condition: condition,
       thenBranch: thenBranch,
       elseIfs: elseIfs ? elseIfs : [],
@@ -544,6 +554,7 @@ ElseIf
   = ElseIfToken __ condition:Expression __ branch:WrappedExpressions {
     return {
       type: "ElseIf",
+      location: location(),
       condition: condition,
       branch: branch
     };
@@ -560,6 +571,7 @@ LoopExpression
     ReturnsToken __ returns:ExpressionList __ {
     return {
       type: "Loop",
+      location: location(),
       range: range,
       init: init ? init : [],
       preCondition: preCondition,
@@ -581,5 +593,5 @@ LoopInit
 
 RangeGenerator
   = names:LValue __ InToken __ ranges:ExpressionList __ {
-    return {type: "RangeList", names: names, ranges: ranges };
+    return {type: "RangeList", location: location(), names: names, ranges: ranges };
   }
