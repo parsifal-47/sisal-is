@@ -64,7 +64,7 @@ export class Node {
 
 export function subGraphML(nodes: Node[]): string {
   const component = new Map<string, Node>();
-  const edges = new Array<[string, number, string, number]>();
+  const edges = new Array<[string, number, string, number, Port]>();
 
   let nextNodes = nodes;
   while (nextNodes.length > 0) {
@@ -77,7 +77,7 @@ export function subGraphML(nodes: Node[]): string {
       component.set(node.id, node);
       const nodeEdges = node.getInEdges();
       for (let i = 0; i < nodeEdges.length; i++) {
-        edges.push([nodeEdges[i][0].id, nodeEdges[i][1], node.id, i]);
+        edges.push([nodeEdges[i][0].id, nodeEdges[i][1], node.id, i, nodeEdges[i][0].outPorts[0]]);
         if (!component.has(nodeEdges[i][0].id)) {
           newNextNodes.push(nodeEdges[i][0]);
         }
@@ -87,5 +87,5 @@ export function subGraphML(nodes: Node[]): string {
   }
 
   return Array.from(component.values(), (c) => c.graphML()).join("") +
-         edges.map((e) => GML.makeEdge(e[0], e[1], e[2], e[3])).join("");
+         edges.map((e) => GML.makeEdge(e[0], e[1], e[2], e[3], e[4])).join("");
 }

@@ -1,3 +1,6 @@
+import { Port } from "../ir1/ports/port";
+import { printPortData } from "../print";
+
 export function makeNode(id: string, name: string, location: string, inPorts: number,
                          outPorts: number, subGraph: string = ""): string {
   const genFunction = (prefix: string, quantity: number) => {
@@ -15,10 +18,12 @@ export function makeNode(id: string, name: string, location: string, inPorts: nu
 }
 
 export function makeEdge(idFrom: string, portFrom: number,
-                         idTo: string, portTo: number,
+                         idTo: string, portTo: number, port: Port,
                          inner: boolean = false): string {
+  let portVal = "";
+  printPortData(port, (s: string) => portVal += s);
   return `<edge source="${idFrom}" target="${idTo}" sourceport="out${portFrom}" ` +
-         `targetport="` + (inner ? "out" : "in") + portTo + `"/>`;
+         `targetport="` + (inner ? "out" : "in") + portTo + `"  value="${portVal}"/>`;
 }
 
 export function makeDocument(contents: string): string {
