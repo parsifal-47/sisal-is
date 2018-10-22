@@ -23,7 +23,7 @@ export function makeEdge(idFrom: string, portFrom: number,
   let portVal = "";
   printPortData(port, (s: string) => portVal += s);
   return `<edge source="${idFrom}" target="${idTo}" sourceport="out${portFrom}" ` +
-         `targetport="` + (inner ? "out" : "in") + portTo + `"  value="${portVal}"/>`;
+         `targetport="` + (inner ? "out" : "in") + portTo + `" value="${portVal}"/>`;
 }
 
 export function makeDocument(contents: string): string {
