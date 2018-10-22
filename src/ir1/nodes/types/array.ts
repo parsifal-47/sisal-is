@@ -12,7 +12,7 @@ export class ArrayType extends Node {
   private nodes: Node[];
 
   constructor(defintion: ASTTypes.ArrayType, scope: Scope) {
-    super("ArrayType");
+    super("ArrayType", defintion);
 
     this.nodes = [];
     this.nodes.push(nodeFromExpression(defintion.elementType, scope));

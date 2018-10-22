@@ -14,7 +14,7 @@ export class FunctionCall extends Node {
   private callScope?: FlatScope;
 
   constructor(functionSource: Node, defintion: AST.FunctionCall, scope: Scope) {
-    super("FunctionCall");
+    super("FunctionCall", defintion);
     this.nodes = [];
     this.nodes.push(functionSource);
 

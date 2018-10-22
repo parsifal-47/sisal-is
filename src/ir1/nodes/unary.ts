@@ -11,7 +11,7 @@ export class UnaryExpression extends Node {
   private operator: string;
 
   constructor(definition: AST.UnaryExpression, scope: Scope) {
-    super("Unary");
+    super("Unary", definition);
     this.operator = definition.operator;
 
     this.nodes = [];

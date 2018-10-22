@@ -13,7 +13,7 @@ export class LoopExpression extends Node {
   private scope: LoopScope;
 
   constructor(definition: AST.LoopExpression, scope: Scope) {
-    super("LoopExpression");
+    super("LoopExpression", definition);
     this.scope = new LoopScope(scope, definition.body, definition.range, definition.init,
                                definition.preCondition, definition.postCondition);
 

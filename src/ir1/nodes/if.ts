@@ -11,7 +11,7 @@ export class IfExpression extends Node {
   private branches: IfBranch[];
 
   constructor(definition: AST.IfExpression, scope: Scope) {
-    super("If");
+    super("If", definition);
     this.branches = [];
     this.branches.push(new IfBranch(definition.condition, definition.thenBranch, scope));
 

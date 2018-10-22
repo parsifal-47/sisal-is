@@ -6,7 +6,7 @@ import { Node } from "./node";
 
 export class OldValue extends Node {
   public constructor(definition: AST.OldValue, scope: Scope) {
-    super("OldValue");
+    super("OldValue", definition);
     this.outPorts = [new StreamPort(
       (type: ReadyType, offset: number) => scope.resolve(definition.id, type, offset - 1))];
   }

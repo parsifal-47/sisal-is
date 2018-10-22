@@ -8,7 +8,7 @@ import { Node } from "./node";
 export class Literal extends Node {
 
   constructor(defintion: AST.Literal) {
-    super("Literal");
+    super("Literal", defintion);
 
     if (!AST.isLiteral(defintion)) {
       throw new Error("Trying to construct literal from " + JSON.stringify(defintion));

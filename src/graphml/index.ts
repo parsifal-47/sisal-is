@@ -1,11 +1,13 @@
-export function makeNode(id: string, name: string, inPorts: number,
+export function makeNode(id: string, name: string, location: string, inPorts: number,
                          outPorts: number, subGraph: string = ""): string {
   const genFunction = (prefix: string, quantity: number) => {
     return (Array.from(new Array(quantity),
        (val, index) => "<port name=\"" + prefix + String(index) + "\" />").join(""));
   };
 
-  return `<node id="${id}"><data key="type">${name}</data>` +
+  return `<node id="${id}">
+            <data key="type">${name}</data>
+            <data key="location">${location}</data>` +
          genFunction("in", inPorts) +
          genFunction("out", outPorts) +
          subGraph +
@@ -26,6 +28,7 @@ export function makeDocument(contents: string): string {
         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
           http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
     <key id="type" for="node" attr.name="nodetype" attr.type="string" />
+    <key id="location" for="node" attr.name="location" attr.type="string" />
 ${contents}
 </graphml>`;
 }

@@ -1,3 +1,4 @@
+import * as AST from "../../ast";
 import * as GML from "../../graphml/";
 import { Port } from "../ports/port";
 
@@ -11,11 +12,19 @@ export class Node {
   public siblings: Node[];
   public id: string;
 
-  constructor(name: string) {
+  constructor(name: string, ast?: AST.Node) {
     Node.lastId++;
 
     this.name = name;
-    this.location = "unknown";
+    if (ast && ast.location) {
+      const locString = (position: AST.Position) => {
+        return String(position.line) + ":" + String(position.column);
+      };
+      this.location = locString(ast.location.start) + "-" +
+                      locString(ast.location.end);
+    } else {
+      this.location = "not applicable";
+    }
     this.outPorts = [];
     this.inPorts = [];
     this.siblings = [];
@@ -49,7 +58,7 @@ export class Node {
   }
 
   protected graphMLInternal(subGraph: string): string {
-    return GML.makeNode(this.id, this.name, this.inPorts.length, this.outPorts.length, subGraph);
+    return GML.makeNode(this.id, this.name, this.location, this.inPorts.length, this.outPorts.length, subGraph);
   }
 }
 

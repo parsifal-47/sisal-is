@@ -12,7 +12,7 @@ export class StreamType extends Node {
   private nodes: Node[];
 
   constructor(defintion: ASTTypes.StreamType, scope: Scope) {
-    super("StreamType");
+    super("StreamType", defintion);
 
     this.nodes = [];
     this.nodes.push(nodeFromExpression(defintion.elementType, scope));

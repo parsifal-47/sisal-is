@@ -11,7 +11,7 @@ export class ArrayAccess extends Node {
   private nodes: Node[];
 
   constructor(arraySource: Node, defintion: AST.ArrayAccess, scope: Scope) {
-    super("ArrayAccess");
+    super("ArrayAccess", defintion);
     this.nodes = [];
     this.nodes.push(arraySource);
     this.nodes.push(nodeFromExpression(defintion.index, scope));

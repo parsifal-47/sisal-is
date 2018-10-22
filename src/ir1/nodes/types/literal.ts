@@ -8,7 +8,7 @@ import { Node } from "../node";
 export class LiteralType extends Node {
 
   constructor(defintion: ASTTypes.PrimitiveType) {
-    super("LiteralType");
+    super("LiteralType", defintion);
 
     let value: Values.ReadyValue;
 

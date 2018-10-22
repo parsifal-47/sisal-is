@@ -12,7 +12,7 @@ export class LetExpression extends Node {
   private nodes: Node[];
 
   constructor(definition: AST.LetExpression, scope: Scope) {
-    super("Let");
+    super("Let", definition);
     this.scope = new FlatScope(scope);
     this.scope.addFromAST(definition.definitions);
 

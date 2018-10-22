@@ -14,7 +14,7 @@ export class RecordType extends Node {
   private names: string[];
 
   constructor(defintion: ASTTypes.RecordType, scope: Scope) {
-    super("RecordType");
+    super("RecordType", defintion);
     this.nodes = [];
     this.names = [];
 

@@ -11,7 +11,7 @@ export class BinaryExpression extends Node {
   private operator: string;
 
   constructor(definition: AST.BinaryExpression, scope: Scope) {
-    super("Binary");
+    super("Binary", definition);
     this.operator = definition.operator;
 
     this.nodes = [];

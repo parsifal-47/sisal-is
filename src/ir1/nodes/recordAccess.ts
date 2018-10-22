@@ -12,7 +12,7 @@ export class RecordAccess extends Node {
   private field: string;
 
   constructor(recordSource: Node, defintion: AST.RecordAccess, scope: Scope) {
-    super("RecordAccess");
+    super("RecordAccess", defintion);
     this.nodes = [];
     this.nodes.push(recordSource);
     this.addInPorts(this.nodes);

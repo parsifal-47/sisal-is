@@ -13,7 +13,7 @@ export class FunctionType extends Node {
   private returns: Node[];
 
   constructor(defintion: ASTTypes.FunctionType, scope: Scope) {
-    super("FunctionType");
+    super("FunctionType", defintion);
 
     this.params = [];
     for (const expression of defintion.params) {

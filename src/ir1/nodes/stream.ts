@@ -12,7 +12,7 @@ export class StreamValue extends Node {
   private rightBound?: Values.Integer;
 
   constructor(defintion: AST.StreamValue, scope: Scope) {
-    super("StreamValue");
+    super("StreamValue", defintion);
     this.nodes = [];
     this.nodes.push(nodeFromExpression(defintion.lowerBound, scope));
 

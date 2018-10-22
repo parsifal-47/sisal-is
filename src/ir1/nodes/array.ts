@@ -11,7 +11,7 @@ export class ArrayValue extends Node {
   private nodes: Node[];
 
   constructor(defintion: AST.ArrayValue, scope: Scope) {
-    super("Array");
+    super("Array", defintion);
     this.nodes = [];
     for (const expression of defintion.contents) {
       this.nodes.push(nodeFromExpression(expression, scope));
