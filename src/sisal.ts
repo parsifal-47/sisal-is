@@ -23,6 +23,9 @@ const stdLib = buildStdLib(parser);
 const program = new Program(fs.readFileSync(args[2], "utf8"), parser, stdLib);
 
 if (graph) {
+  for (const port of program.outputs) {
+    printPortData(port, (s: string) => {});
+  }
   process.stdout.write(pd.xml(program.graphML()));
 } else {
   let outNumber = 0;

@@ -1,4 +1,5 @@
 import * as AST from "../../ast/expression";
+import * as GML from "../../graphml/";
 import { nodeFromExpression } from "../create";
 import { StreamPort } from "../ports/stream";
 import { FlatScope } from "../scopes/flat";
@@ -6,7 +7,7 @@ import { Scope } from "../scopes/scope";
 import * as Types from "../types";
 import { checkType } from "../types/check";
 import * as Values from "../values";
-import { Node } from "./node";
+import { Node, subGraphML } from "./node";
 
 export class FunctionCall extends Node {
   private nodes: Node[];
@@ -64,6 +65,10 @@ export class FunctionCall extends Node {
     }
 
     return this.fetchReadyData(portNum, type, offset);
+  }
+
+  public graphML(): string {
+    return this.graphMLInternal(GML.makeGraph("function", subGraphML(this.functionBody)));
   }
 
   private fetchReadyData(portNum: number, type: Types.ReadyType, offset: number): Values.ReadyValue {
