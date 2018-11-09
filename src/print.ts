@@ -15,7 +15,7 @@ function printValue(value: Values.ReadyValue, print: (s: string) => void) {
     return;
   }
   if (value instanceof Values.Function) {
-    print("<function_body>");
+    print("{function_body}");
     return;
   }
   if (value instanceof Values.Array || value instanceof Values.CompleteStream) {

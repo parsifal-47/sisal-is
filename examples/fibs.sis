@@ -5,4 +5,4 @@ fib = f(m)
     fib(m - 1) + fib(m - 2)
 
 main = f()
-  fib(2), fib(18)
+  fib(2), fib(5)
